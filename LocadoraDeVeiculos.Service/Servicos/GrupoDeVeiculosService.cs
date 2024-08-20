@@ -1,7 +1,7 @@
 ﻿using FluentResults;
 using LocadoraDeVeiculos.Dominio.ModuloGrupoDeAutomoveis;
 
-namespace ControleCinema.Aplicacao.Servicos;
+namespace LocadoraDeVeiculos.Web.Aplicacao.Servicos;
 
 public class GrupoDeAutomoveisService
 {

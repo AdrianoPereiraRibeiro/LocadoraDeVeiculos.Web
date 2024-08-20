@@ -24,6 +24,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\LocadoraDeVeiculos.Infraestrutura\LocadoraDeVeiculos.Infraestrutura.csproj" />
+    <ProjectReference Include="..\LocadoraDeVeiculos.Service\LocadoraDeVeiculos.Service.csproj" />
   </ItemGroup>
 
 </Project>
