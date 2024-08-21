@@ -3,6 +3,7 @@ using FluentResults;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
 using LocadoraDeVeiculos.Web.Extensions;
+using LocadoraDeVeiculos.WebApp.Models;
 
 namespace LocadoraDeVeiculos.Web.Controllers;
 

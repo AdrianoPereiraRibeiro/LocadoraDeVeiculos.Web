@@ -1,4 +1,5 @@
-﻿using LocadoraDeVeiculos.Dominio.ModuloGrupoDeAutomoveis;
+﻿using ControleCinema.Infra.Orm.ModuloSala;
+using LocadoraDeVeiculos.Dominio.ModuloGrupoDeAutomoveis;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 
@@ -21,5 +22,11 @@ public class LocadoraDbContext : DbContext
         optionsBuilder.UseSqlServer(connectionString);
 
         base.OnConfiguring(optionsBuilder);
+    }
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        modelBuilder.ApplyConfiguration(new MapeadorGrupoDeVeiculosEmOrm());
+
+        base.OnModelCreating(modelBuilder);
     }
 }

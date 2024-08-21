@@ -1,6 +1,9 @@
 
 using System.Reflection;
+using ControleCinema.Infra.Orm.ModuloSala;
+using LocadoraDeVeiculos.Dominio.ModuloGrupoDeAutomoveis;
 using LocadoraDeVeiculos.Infra.Orm.Compartilhado;
+using LocadoraDeVeiculos.Web.Aplicacao.Servicos;
 
 namespace LocadoraDeVeiculos.Web
 {
@@ -12,6 +15,9 @@ namespace LocadoraDeVeiculos.Web
 
             builder.Services.AddDbContext<LocadoraDbContext>();
 
+            builder.Services.AddScoped<IRepositorioGrupoDeAutomoveis, RepositorioGrupoDeVeiculosEmOrm>();
+            builder.Services.AddScoped<GrupoDeAutomoveisService>();
+
             builder.Services.AddAutoMapper(cfg => { cfg.AddMaps(Assembly.GetExecutingAssembly()); });
 
             builder.Services.AddControllersWithViews();
@@ -20,10 +26,13 @@ namespace LocadoraDeVeiculos.Web
 
             if (!app.Environment.IsDevelopment())
             {
+
                 app.UseHsts();
             }
 
+
             app.UseHttpsRedirection();
+
             app.UseStaticFiles();
 
             app.UseRouting();

@@ -1,4 +1,5 @@
 ﻿using System.Text.Json;
+using LocadoraDeVeiculos.WebApp.Models;
 using Microsoft.AspNetCore.Mvc.ViewFeatures;
 
 namespace LocadoraDeVeiculos.Web.Extensions;

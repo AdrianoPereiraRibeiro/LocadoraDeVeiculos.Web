@@ -1,7 +1,7 @@
 ﻿@{
     string caminho = Context.Request.Path;
 
-    // var sessaoAtivo = caminho.StartsWith("/sessao") ? "nav-link active fw-semibold" : "nav-link";
+     var grupoDeAutomoveisAtivo = caminho.StartsWith("/GrupoDeAutomoveis") ? "nav-link active fw-semibold" : "nav-link";
     // var filmeAtivo = caminho.StartsWith("/filme") ? "nav-link active fw-semibold" : "nav-link";
     // var generoAtivo = caminho.StartsWith("/genero") ? "nav-link active fw-semibold" : "nav-link";
     // var salaAtivo = caminho.StartsWith("/sala") ? "nav-link active fw-semibold" : "nav-link";
@@ -25,8 +25,8 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                 <div class="navbar-nav d-lg-flex justify-content-end gap-3 w-100">
-@*                     <a class="px-4 @sessaoAtivo" href="/sessao/listar">Sessões</a>
-                    <a class="px-4 @filmeAtivo" href="/filme/listar">Filmes</a>
+                    <a class="px-4 @grupoDeAutomoveisAtivo" href="/grupodeautomoveis/listar">Grupo De Automóveis</a>
+                   @*  <a class="px-4 @filmeAtivo" href="/filme/listar">Filmes</a>
                     <a class="px-4 @generoAtivo" href="/genero/listar">Gêneros</a>
                     <a class="px-4 @salaAtivo" href="/sala/listar">Salas</a>
                     <a class="px-4 @funcionarioAtivo" href="/funcionario/listar">Funcionários</a> *@

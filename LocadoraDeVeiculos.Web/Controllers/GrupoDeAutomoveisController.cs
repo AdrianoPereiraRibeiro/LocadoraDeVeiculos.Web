@@ -1,9 +1,9 @@
 ﻿using AutoMapper;
-using ControleCinema.Aplicacao.Servicos;
-
 using LocadoraDeVeiculos.Dominio.ModuloGrupoDeAutomoveis;
+using LocadoraDeVeiculos.Web.Aplicacao.Servicos;
 using LocadoraDeVeiculos.Web.Controllers;
 using LocadoraDeVeiculos.Web.Extensions;
+using LocadoraDeVeiculos.WebApp.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
@@ -37,7 +37,7 @@ public class GrupoDeAutomoveisController : WebControllerBase
         var grupoDeAutomoveis = resultado.Value;
 
         var listarGrupoDeAutomoveisViewModels
-            = mapeador.Map<IEnumerable<ListarGrupoDeAutomoveisViewModel>>(grupoDeAutomoveis);
+            = mapeador.Map<IEnumerable<ListarGrupoAutomoveisViewModel>>(grupoDeAutomoveis);
 
         ViewBag.Mensagem = TempData.DesserializarMensagemViewModel();
 
@@ -50,7 +50,7 @@ public class GrupoDeAutomoveisController : WebControllerBase
     }
 
     [HttpPost]
-    public IActionResult Inserir(InserirGrupoDeAutomoveisViewModel inserirGrupoDeAutomoveisVm)
+    public IActionResult Inserir(InserirGrupoAutomoveisViewModel inserirGrupoDeAutomoveisVm)
     {
         if (!ModelState.IsValid)
             return View(inserirGrupoDeAutomoveisVm);
@@ -86,13 +86,13 @@ public class GrupoDeAutomoveisController : WebControllerBase
 
         var GrupoDeAutomoveis = resultado.Value;
 
-        var editarGrupoDeAutomoveisVm = mapeador.Map<EditarSalaViewModel>(GrupoDeAutomoveis);
+        var editarGrupoDeAutomoveisVm = mapeador.Map<EditarGrupoAutomoveisViewModel>(GrupoDeAutomoveis);
 
         return View(editarGrupoDeAutomoveisVm);
     }
 
     [HttpPost]
-    public IActionResult Editar(EditarGrupoDeAutomoveisViewModel editarSalaVm)
+    public IActionResult Editar(EditarGrupoAutomoveisViewModel editarSalaVm)
     {
         if (!ModelState.IsValid)
             return View(editarSalaVm);
@@ -126,13 +126,13 @@ public class GrupoDeAutomoveisController : WebControllerBase
 
         var GrupoDeAutomoveis = resultado.Value;
 
-        var detalhesGrupoDeAutomoveisViewModel = mapeador.Map<DetalhesSalaViewModel>(GrupoDeAutomoveis);
+        var detalhesGrupoDeAutomoveisViewModel = mapeador.Map<DetalhesGrupoAutomoveisViewModel>(GrupoDeAutomoveis);
 
         return View(detalhesGrupoDeAutomoveisViewModel);
     }
 
     [HttpPost]
-    public IActionResult Excluir(DetalhesGrupoDeAutomoveisViewModel detalhesGrupoDeAutomoveisViewModel)
+    public IActionResult Excluir(DetalhesGrupoAutomoveisViewModel detalhesGrupoDeAutomoveisViewModel)
     {
         var resultado = servicoGrupoDeAutomoveis.Excluir(detalhesGrupoDeAutomoveisViewModel.Id);
 
@@ -161,7 +161,7 @@ public class GrupoDeAutomoveisController : WebControllerBase
 
         var GrupoDeAutomoveis = resultado.Value;
 
-        var detalhesGrupoDeAutomoveisViewModel = mapeador.Map<DetalhesSalaViewModel>(GrupoDeAutomoveis);
+        var detalhesGrupoDeAutomoveisViewModel = mapeador.Map<DetalhesGrupoAutomoveisViewModel>(GrupoDeAutomoveis);
 
         return View(detalhesGrupoDeAutomoveisViewModel);
     }
