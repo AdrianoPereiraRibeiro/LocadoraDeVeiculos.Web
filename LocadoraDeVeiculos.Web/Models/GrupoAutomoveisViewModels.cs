@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace LocadoraDeVeiculos.WebApp.Models;
+namespace LocadoraDeVeiculos.Web.Models;
 
 public class InserirGrupoAutomoveisViewModel
 {

@@ -1,6 +1,6 @@
 ﻿
 
-namespace ControleCinema.Dominio.Compartilhado;
+namespace LocadoraDeVeiculos.Dominio.Compartilhado;
 
 public abstract class EntidadeBase
 {
@@ -8,5 +8,6 @@ public abstract class EntidadeBase
 
     //public int UsuarioId { get; set; }
     //public Usuario? Usuario { get; set; }
+     public abstract List<string> Validar();
 }
 

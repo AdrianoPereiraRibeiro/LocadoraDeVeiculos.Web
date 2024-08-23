@@ -3,10 +3,9 @@ using LocadoraDeVeiculos.Dominio.ModuloGrupoDeAutomoveis;
 using LocadoraDeVeiculos.Web.Aplicacao.Servicos;
 using LocadoraDeVeiculos.Web.Controllers;
 using LocadoraDeVeiculos.Web.Extensions;
-using LocadoraDeVeiculos.WebApp.Models;
-using Microsoft.AspNetCore.Authorization;
+using LocadoraDeVeiculos.Web.Models;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
+
 
 namespace LocadoraDeVeiculos.Web;
 

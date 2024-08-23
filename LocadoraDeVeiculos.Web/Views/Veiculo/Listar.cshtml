@@ -1,0 +1,50 @@
+﻿@model IEnumerable<ListarVeiculoViewModel>
+
+@{
+    ViewBag.Title = "Listagem de Veículos";
+}
+
+<div class="col">
+
+    <a class="btn btn-primary px-4 mt-3" asp-controller="Veiculo" asp-action="Inserir">
+        <i class="bi bi-circle-add"></i>
+        Inserir Novo Veículo
+    </a>
+
+    <div class="row gap-2 my-3 my-xl-5">
+        @foreach (var veiculoVm in Model)
+        {
+            <div class="card col-lg-4 col-xl-3">
+                <div class="card-header bg-transparent d-flex justify-content-between align-items-center">
+                    <h5 class="p-0">@veiculoVm.Id</h5>
+
+                    <div class="text-end d-flex align-items-center gap-3">
+                        <a title="Detalhes"
+                           class="text-info-emphasis fs-5"
+                           href="/Veiculo/Detalhes/@veiculoVm.Id">
+                            <i class="bi bi-search"></i>
+                        </a>
+                        <a title="Editar"
+                           class="text-info-emphasis fs-5"
+                           href="/Veiculo/Editar/@veiculoVm.Id">
+                            <i class="bi bi-pencil-fill"></i>
+                        </a>
+                        <a title="Excluir"
+                           class="text-info-emphasis fs-5" href="/Veiculo/Excluir/@veiculoVm.Id">
+                            <i class="bi bi-trash-fill"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="card-body">
+                    <h5 class="card-title">@veiculoVm.Modelo</h5>
+                    <p class="card-text">
+                        Marca: @veiculoVm.Marca <br />
+                        Tipo de Combustível: @veiculoVm.TipoCombustivel <br />
+                        Capacidade do Tanque: @veiculoVm.CapacidadeTanque L
+                    </p>
+                </div>
+            </div>
+        }
+    </div>
+</div>

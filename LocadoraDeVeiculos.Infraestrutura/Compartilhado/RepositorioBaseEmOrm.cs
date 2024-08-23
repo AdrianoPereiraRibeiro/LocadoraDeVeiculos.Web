@@ -1,4 +1,4 @@
-﻿using ControleCinema.Dominio.Compartilhado;
+﻿using LocadoraDeVeiculos.Dominio.Compartilhado;
 using Microsoft.EntityFrameworkCore;
 
 namespace LocadoraDeVeiculos.Infra.Orm.Compartilhado;

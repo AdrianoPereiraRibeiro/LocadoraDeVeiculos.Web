@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using LocadoraDeVeiculos.Dominio.ModuloGrupoDeAutomoveis;
+using LocadoraDeVeiculos.Web.Models;
 using LocadoraDeVeiculos.WebApp.Models;
 
 namespace LocadoraDeVeiculos.WebApp.Mapping;

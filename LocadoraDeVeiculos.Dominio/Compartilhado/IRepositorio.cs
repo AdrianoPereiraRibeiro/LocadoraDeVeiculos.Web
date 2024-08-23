@@ -1,4 +1,6 @@
-﻿namespace ControleCinema.Dominio.Compartilhado;
+﻿
+
+namespace LocadoraDeVeiculos.Dominio.Compartilhado;
 
 public interface IRepositorio<TEntidade> where TEntidade : EntidadeBase
 {
