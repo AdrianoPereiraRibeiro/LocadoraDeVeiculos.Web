@@ -4,7 +4,7 @@
      var grupoDeAutomoveisAtivo = caminho.StartsWith("/grupoDeAutomoveis") ? "nav-link active fw-semibold" : "nav-link";
      var veiculoAtivo = caminho.StartsWith("/veiculo") ? "nav-link active fw-semibold" : "nav-link";
     var clienteAtivo = caminho.StartsWith("/cliente") ? "nav-link active fw-semibold" : "nav-link";
-    // var salaAtivo = caminho.StartsWith("/sala") ? "nav-link active fw-semibold" : "nav-link";
+    var condutorAtivo = caminho.StartsWith("/condutor") ? "nav-link active fw-semibold" : "nav-link";
     // var funcionarioAtivo = caminho.StartsWith("/funcionario") ? "nav-link active fw-semibold" : "nav-link";
 }
 
@@ -28,8 +28,8 @@
                     <a class="px-4 @grupoDeAutomoveisAtivo" href="/grupodeautomoveis/listar">Grupo De Automóveis</a>
                     <a class="px-4 @veiculoAtivo" href="/veiculo/listar">Veículos</a>
                     <a class="px-4 @clienteAtivo" href="/cliente/listar">Clientes</a>
-                   @*  <a class="px-4 @salaAtivo" href="/sala/listar">Salas</a>
-                    <a class="px-4 @funcionarioAtivo" href="/funcionario/listar">Funcionários</a>  *@
+                    <a class="px-4 @condutorAtivo" href="/condutor/listar">Condutores</a>
+                   @*  <a class="px-4 @funcionarioAtivo" href="/funcionario/listar">Funcionários</a>  *@
                 </div>
             </div>
         </div>

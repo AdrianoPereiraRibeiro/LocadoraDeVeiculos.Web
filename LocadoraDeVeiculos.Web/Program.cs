@@ -2,10 +2,12 @@
 using System.Reflection;
 using ControleCinema.Infra.Orm.ModuloSala;
 using LocadoraDeVeiculos.Dominio.ModuloCliente;
+using LocadoraDeVeiculos.Dominio.ModuloCondutor;
 using LocadoraDeVeiculos.Dominio.ModuloGrupoDeAutomoveis;
 using LocadoraDeVeiculos.Dominio.ModuloVeiculo;
 using LocadoraDeVeiculos.Infra.Orm.Compartilhado;
 using LocadoraDeVeiculos.Infra.Orm.ModuloVeiculo;
+using LocadoraDeVeiculos.Infraestrutura;
 using LocadoraDeVeiculos.Service.Servicos;
 using LocadoraDeVeiculos.Web.Aplicacao.Servicos;
 
@@ -25,6 +27,8 @@ namespace LocadoraDeVeiculos.Web
             builder.Services.AddScoped<VeiculoService>();
             builder.Services.AddScoped<IRepositorioCliente, RepositorioClienteEmOrm>();
             builder.Services.AddScoped<ClienteService>();
+            builder.Services.AddScoped<IRepositorioCondutor, RepositorioCondutorEmOrm>();
+            builder.Services.AddScoped<CondutorService>();
 
             builder.Services.AddAutoMapper(cfg => { cfg.AddMaps(Assembly.GetExecutingAssembly()); });
 
