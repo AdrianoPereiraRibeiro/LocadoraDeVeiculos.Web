@@ -1,0 +1,92 @@
+﻿@using LocadoraDeVeiculos.Dominio.ModuloVeiculo
+
+@model FormularioClienteViewModel
+
+@{
+    ViewBag.Title = "Editar Cliente";
+}
+
+<div class="col">
+    <div class="row gap-3 my-3 my-xl-5">
+        <form class="col-lg-6 d-grid gap-3 fs-5" asp-action="Editar">
+            <div>
+                <label class="control-label fw-semibold mb-1">Nome</label>
+                <input class="form-control mb-1" asp-for="Nome" />
+                <span class="text-danger fs-6" asp-validation-for="Nome"></span>
+            </div>
+
+            <div>
+                <label class="control-label fw-semibold mb-1">Email</label>
+                <input class="form-control mb-1" asp-for="Email" />
+                <span class="text-danger fs-6" asp-validation-for="Email"></span>
+            </div>
+
+
+            <div>
+                <label class="control-label fw-semibold mb-1">Telefone</label>
+                <input class="form-control mb-1" asp-for="Telefone" />
+                <span class="text-danger fs-6" asp-validation-for="Telefone"></span>
+            </div>
+
+            <div>
+                <label class="control-label fw-semibold mb-1">Tipo de Pessoa</label>
+                <select class="form-control mb-1" asp-for="TipoDePessoa" asp-items="Html.GetEnumSelectList<TipoPessoa>()"></select>
+                <span class="text-danger fs-6" asp-validation-for="TipoDePessoa"></span>
+            </div>
+            
+                <div>
+                    <label class="control-label fw-semibold mb-1">CPF</label>
+                    <input class="form-control mb-1" asp-for="CPF" />
+                    <span class="text-danger fs-6" asp-validation-for="CPF"></span>
+                </div>
+            
+                <div>
+                    <label class="control-label fw-semibold mb-1">CNPJ</label>
+                    <input class="form-control mb-1" asp-for="CNPJ" />
+                    <span class="text-danger fs-6" asp-validation-for="CNPJ"></span>
+                </div>
+            
+            <div>
+                <label class="control-label fw-semibold mb-1">Estado</label>
+                <input class="form-control mb-1" asp-for="Estado" />
+                <span class="text-danger fs-6" asp-validation-for="Estado"></span>
+            </div>
+
+            <div>
+                <label class="control-label fw-semibold mb-1">Cidade</label>
+                <input class="form-control mb-1" asp-for="Cidade" />
+                <span class="text-danger fs-6" asp-validation-for="Cidade"></span>
+            </div>
+
+            <div>
+                <label class="control-label fw-semibold mb-1">Bairro</label>
+                <input class="form-control mb-1" asp-for="Bairro" />
+                <span class="text-danger fs-6" asp-validation-for="Bairro"></span>
+            </div>
+
+            <div>
+                <label class="control-label fw-semibold mb-1">Rua</label>
+                <input class="form-control mb-1" asp-for="Rua" />
+                <span class="text-danger fs-6" asp-validation-for="Rua"></span>
+            </div>
+
+            <div>
+                <label class="control-label fw-semibold mb-1">Número</label>
+                <input class="form-control mb-1" asp-for="Numero" />
+                <span class="text-danger fs-6" asp-validation-for="Numero"></span>
+            </div>
+
+            <div class="d-grid gap-2 d-md-block mt-4">
+                <button class="btn btn-primary px-5">
+                    <i class="bi bi-floppy-fill me-1"></i>
+                    Gravar
+                </button>
+
+                <a class="btn btn-outline-primary px-5" asp-action="Listar">
+                    <i class="bi bi-arrow-return-left me-1"></i>
+                    Voltar
+                </a>
+            </div>
+        </form>
+    </div>
+</div>

@@ -1,4 +1,5 @@
 ﻿using ControleCinema.Infra.Orm.ModuloSala;
+using LocadoraDeVeiculos.Dominio.ModuloCliente;
 using LocadoraDeVeiculos.Dominio.ModuloGrupoDeAutomoveis;
 using LocadoraDeVeiculos.Dominio.ModuloVeiculo;
 using LocadoraDeVeiculos.Infra.Orm.ModuloVeiculo;
@@ -11,6 +12,7 @@ public class LocadoraDbContext : DbContext
 {
     public DbSet<GrupoDeAutomoveis> GrupoDeAutomoveis { get; set; }
     public DbSet<Veiculo> Veiculos { get; set; }
+    public DbSet<Cliente> Clientes { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
@@ -28,7 +30,7 @@ public class LocadoraDbContext : DbContext
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.ApplyConfiguration(new MapeadorGrupoDeVeiculosEmOrm());
-        modelBuilder.ApplyConfiguration(new MapeadorVeiculo());
+        modelBuilder.ApplyConfiguration(new MapeadorCliente());
 
         base.OnModelCreating(modelBuilder);
     }
