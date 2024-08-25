@@ -4,10 +4,12 @@ using ControleCinema.Infra.Orm.ModuloSala;
 using LocadoraDeVeiculos.Dominio.ModuloCliente;
 using LocadoraDeVeiculos.Dominio.ModuloCondutor;
 using LocadoraDeVeiculos.Dominio.ModuloGrupoDeAutomoveis;
+using LocadoraDeVeiculos.Dominio.ModuloPrecosCombustiveis;
 using LocadoraDeVeiculos.Dominio.ModuloVeiculo;
 using LocadoraDeVeiculos.Infra.Orm.Compartilhado;
 using LocadoraDeVeiculos.Infra.Orm.ModuloVeiculo;
 using LocadoraDeVeiculos.Infraestrutura;
+using LocadoraDeVeiculos.Infraestrutura.ModuloPrecosCombustiveis;
 using LocadoraDeVeiculos.Service.Servicos;
 using LocadoraDeVeiculos.Web.Aplicacao.Servicos;
 
@@ -29,6 +31,9 @@ namespace LocadoraDeVeiculos.Web
             builder.Services.AddScoped<ClienteService>();
             builder.Services.AddScoped<IRepositorioCondutor, RepositorioCondutorEmOrm>();
             builder.Services.AddScoped<CondutorService>();
+            builder.Services.AddScoped<IRepositorioPrecosCombustiveis, RepositorioPrecoCombustiveisEmOrm>();
+            builder.Services.AddScoped<PrecosCombustiveisService>();
+
 
             builder.Services.AddAutoMapper(cfg => { cfg.AddMaps(Assembly.GetExecutingAssembly()); });
 

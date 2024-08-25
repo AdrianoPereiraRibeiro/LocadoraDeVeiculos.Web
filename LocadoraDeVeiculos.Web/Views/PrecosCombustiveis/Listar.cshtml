@@ -1,0 +1,36 @@
+﻿@model IEnumerable<ListarPrecosCombustiveisViewModel>
+
+@{
+    ViewBag.Title = "Listagem de Combustíveis";
+}
+
+<div class="col">
+
+
+    <div class="row gap-2 my-3 my-xl-5">
+        @foreach (var grupoVm in Model)
+        {
+            <div class="card col-lg-4 col-xl-3">
+                <div class="card-header bg-transparent d-flex justify-content-between align-items-center">
+
+                    <div class="text-end d-flex align-items-center gap-3">
+                        <a title="Detalhes"
+                           class="text-info-emphasis fs-5"
+                           href="/precoscombustiveis/Detalhes/@grupoVm.Id">
+                            <i class="bi bi-search"></i>
+                        </a>
+                        <a title="Editar"
+                           class="text-info-emphasis fs-5"
+                           href="/precoscombustiveis/Editar/@grupoVm.Id">
+                            <i class="bi bi-pencil-fill"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="card-body">
+                    <h5 class="card-title">Combustíveis</h5>
+                </div>
+            </div>
+        }
+    </div>
+</div>

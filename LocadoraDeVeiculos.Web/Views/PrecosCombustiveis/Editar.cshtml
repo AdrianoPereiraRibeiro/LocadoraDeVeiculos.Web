@@ -1,0 +1,57 @@
+﻿@model EditarPrecosCombustiveisViewModel
+
+@{
+    ViewBag.Title = "Editar Preços de Combustíveis";
+}
+
+<div class="col">
+    <div class="row gap-3 my-3 my-xl-5">
+        <form class="col-lg-6 d-grid gap-3 fs-5" asp-action="Editar">
+            <div>
+                <label class="control-label fw-semibold mb-1">Preço Gasolina:</label>
+                <input class="form-control mb-1" asp-for="PrecoGasolina" id="precoGasolina" oninput="formatarPreco(this)" />
+                <span class="text-danger fs-6" asp-validation-for="PrecoGasolina"></span>
+            </div>
+            
+            <div>
+                <label class="control-label fw-semibold mb-1">Preço Diesel:</label>
+                <input class="form-control mb-1" asp-for="PrecoDiesel" id="precoDiesel" oninput="formatarPreco(this)" />
+                <span class="text-danger fs-6" asp-validation-for="PrecoDiesel"></span>
+            </div>
+            
+            <div>
+                <label class="control-label fw-semibold mb-1">Preço Gás:</label>
+                <input class="form-control mb-1" asp-for="PrecoGas" id="precoGas" oninput="formatarPreco(this)" />
+                <span class="text-danger fs-6" asp-validation-for="PrecoGas"></span>
+            </div>
+            
+            <div>
+                <label class="control-label fw-semibold mb-1">Preço Alcool:</label>
+                <input class="form-control mb-1" asp-for="PrecoAlcool" id="precoAlcool" oninput="formatarPreco(this)" />
+                <span class="text-danger fs-6" asp-validation-for="PrecoAlcool"></span>
+            </div>
+
+            <div class="d-grid gap-2 d-md-block mt-4">
+                <button class="btn btn-primary px-5">
+                    <i class="bi bi-floppy-fill me-1"></i>
+                    Gravar
+                </button>
+
+                <a class="btn btn-outline-primary px-5" href="/precoscombustiveis/Listar">
+                    <i class="bi bi-arrow-return-left me-1"></i>
+                    Voltar
+                </a>
+            </div>
+        </form>
+    </div>
+</div>
+<script>
+    function formatarPreco(element) {
+        let valor = element.value;
+        valor = valor.replace(/\D/g, ""); // Remove caracteres não numéricos
+        valor = (valor / 100).toFixed(2) + ""; // Converte para decimal
+        valor = valor.replace(".", ","); // Substitui ponto por vírgula
+        valor = valor.replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1."); // Adiciona pontos como separadores de milhar
+        element.value = valor;
+    }
+</script>
