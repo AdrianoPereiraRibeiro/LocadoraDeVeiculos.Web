@@ -1,0 +1,53 @@
+﻿@using LocadoraDeVeiculos.Dominio.ModuloTaxaEServico
+@using Microsoft.AspNetCore.Mvc.TagHelpers
+@model EditarTaxaEServicoViewModel
+
+@{
+    ViewBag.Title = "Editar Taxas e Serviços";
+}
+
+<div class="col">
+    <div class="row gap-3 my-3 my-xl-5">
+        <form class="col-lg-6 d-grid gap-3 fs-5" asp-action="Editar">
+            <div>
+                <label class="control-label fw-semibold mb-1">Nome</label>
+                <input class="form-control mb-1" asp-for="Nome"/>
+                <span class="text-danger fs-6" asp-validation-for="Nome"></span>
+            </div>
+            
+            <div>
+                <label class="control-label fw-semibold mb-1">Método de Cobrança</label>
+                <select class="form-control mb-1" asp-for="FixoOuDiario" asp-items="Html.GetEnumSelectList<FIxoOuDiario>()"></select>
+                <span class="text-danger fs-6" asp-validation-for="FixoOuDiario"></span>
+            </div>
+            
+            <div>
+                <label class="control-label fw-semibold mb-1">Preço:</label>
+                <input class="form-control mb-1" asp-for="Preco" id="preco" oninput="formatarPreco(this)" />
+                <span class="text-danger fs-6" asp-validation-for="Preco"></span>
+            </div>
+
+            <div class="d-grid gap-2 d-md-block mt-4">
+                <button class="btn btn-primary px-5">
+                    <i class="bi bi-floppy-fill me-1"></i>
+                    Gravar
+                </button>
+
+                <a class="btn btn-outline-primary px-5" href="/TaxaEServico/Listar">
+                    <i class="bi bi-arrow-return-left me-1"></i>
+                    Voltar
+                </a>
+            </div>
+        </form>
+    </div>
+</div>
+<script>
+    function formatarPreco(element) {
+        let valor = element.value;
+        valor = valor.replace(/\D/g, "");
+        valor = (valor / 100).toFixed(2) + "";
+        valor = valor.replace(".", ",");
+        valor = valor.replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.");
+        element.value = valor;
+    }
+</script>

@@ -5,11 +5,13 @@ using LocadoraDeVeiculos.Dominio.ModuloCliente;
 using LocadoraDeVeiculos.Dominio.ModuloCondutor;
 using LocadoraDeVeiculos.Dominio.ModuloGrupoDeAutomoveis;
 using LocadoraDeVeiculos.Dominio.ModuloPrecosCombustiveis;
+using LocadoraDeVeiculos.Dominio.ModuloTaxaEServico;
 using LocadoraDeVeiculos.Dominio.ModuloVeiculo;
 using LocadoraDeVeiculos.Infra.Orm.Compartilhado;
 using LocadoraDeVeiculos.Infra.Orm.ModuloVeiculo;
 using LocadoraDeVeiculos.Infraestrutura;
 using LocadoraDeVeiculos.Infraestrutura.ModuloPrecosCombustiveis;
+using LocadoraDeVeiculos.Infraestrutura.ModuloTaxaEServico;
 using LocadoraDeVeiculos.Service.Servicos;
 using LocadoraDeVeiculos.Web.Aplicacao.Servicos;
 
@@ -33,7 +35,8 @@ namespace LocadoraDeVeiculos.Web
             builder.Services.AddScoped<CondutorService>();
             builder.Services.AddScoped<IRepositorioPrecosCombustiveis, RepositorioPrecoCombustiveisEmOrm>();
             builder.Services.AddScoped<PrecosCombustiveisService>();
-
+            builder.Services.AddScoped<IRepositorioTaxaEServico, RepositorioTaxaEServicoEmOrm>();
+            builder.Services.AddScoped<TaxaEServicoService>();
 
             builder.Services.AddAutoMapper(cfg => { cfg.AddMaps(Assembly.GetExecutingAssembly()); });
 

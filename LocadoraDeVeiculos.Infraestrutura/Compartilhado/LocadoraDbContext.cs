@@ -3,9 +3,11 @@ using LocadoraDeVeiculos.Dominio.ModuloCliente;
 using LocadoraDeVeiculos.Dominio.ModuloCondutor;
 using LocadoraDeVeiculos.Dominio.ModuloGrupoDeAutomoveis;
 using LocadoraDeVeiculos.Dominio.ModuloPrecosCombustiveis;
+using LocadoraDeVeiculos.Dominio.ModuloTaxaEServico;
 using LocadoraDeVeiculos.Dominio.ModuloVeiculo;
 using LocadoraDeVeiculos.Infra.Orm.ModuloVeiculo;
 using LocadoraDeVeiculos.Infraestrutura.ModuloPrecosCombustiveis;
+using LocadoraDeVeiculos.Infraestrutura.ModuloTaxaEServico;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 
@@ -18,6 +20,7 @@ public class LocadoraDbContext : DbContext
     public DbSet<Cliente> Clientes { get; set; }
     public DbSet<Condutor> Condutores { get; set; }
     public DbSet<PrecosCombustiveis> PrecosCombustiveis { get; set; }
+    public DbSet<TaxaEServico> TaxasEServicos { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
@@ -39,6 +42,7 @@ public class LocadoraDbContext : DbContext
         modelBuilder.ApplyConfiguration(new MapeadorCliente());
         modelBuilder.ApplyConfiguration(new MapeadorCondutorEmOrm());
         modelBuilder.ApplyConfiguration(new MapeadorPrecosCombustiveisEmOrm());
+        modelBuilder.ApplyConfiguration(new MapeadorTaxaEServicoEmOrm());
         
 
         base.OnModelCreating(modelBuilder);

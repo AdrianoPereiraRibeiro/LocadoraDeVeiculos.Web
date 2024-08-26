@@ -48,10 +48,10 @@
 <script>
     function formatarPreco(element) {
         let valor = element.value;
-        valor = valor.replace(/\D/g, ""); // Remove caracteres não numéricos
-        valor = (valor / 100).toFixed(2) + ""; // Converte para decimal
-        valor = valor.replace(".", ","); // Substitui ponto por vírgula
-        valor = valor.replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1."); // Adiciona pontos como separadores de milhar
+        valor = valor.replace(/\D/g, ""); 
+        valor = (valor / 100).toFixed(2) + "";
+        valor = valor.replace(".", ","); 
+        valor = valor.replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1."); 
         element.value = valor;
     }
 </script>

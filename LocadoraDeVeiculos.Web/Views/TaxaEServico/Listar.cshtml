@@ -1,0 +1,49 @@
+﻿@model IEnumerable<ListarTaxaEServicoViewModel>
+
+@{
+    ViewBag.Title = "Listagem de Taxas e Serviços";
+}
+
+<div class="col">
+
+    <a class="btn btn-primary px-4 mt-3" asp-controller="TaxaEServico" asp-action="Inserir">
+        <i class="bi bi-circle-add"></i>
+        Inserir Nova Taxa ou Serviço
+    </a>
+
+    <div class="row gap-2 my-3 my-xl-5">
+        @foreach (var grupoVm in Model)
+        {
+            <div class="card col-lg-4 col-xl-3">
+                <div class="card-header bg-transparent d-flex justify-content-between align-items-center">
+                    <h5 class="p-0">@grupoVm.Id</h5>
+
+                    <div class="text-end d-flex align-items-center gap-3">
+                        <a title="Detalhes"
+                           class="text-info-emphasis fs-5"
+                           href="/TaxaEServico/Detalhes/@grupoVm.Id">
+                            <i class="bi bi-search"></i>
+                        </a>
+                        <a title="Editar"
+                           class="text-info-emphasis fs-5"
+                           href="/TaxaEServico/Editar/@grupoVm.Id">
+                            <i class="bi bi-pencil-fill"></i>
+                        </a>
+                        <a title="Excluir"
+                           class="text-info-emphasis fs-5" href="/TaxaEServico/Excluir/@grupoVm.Id">
+                            <i class="bi bi-trash-fill"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="card-body">
+                    <h5 class="card-title">@grupoVm.Nome</h5>
+                    <p class="card-text">
+                        Método De Cobrança: @grupoVm.FixoOuDiario <br />
+                        Preço: @grupoVm.Preco
+                    </p>
+                </div>
+            </div>
+        }
+    </div>
+</div>
