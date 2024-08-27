@@ -1,0 +1,88 @@
+﻿@model FormularioPlanoCobrancaViewModel?
+@{
+ViewBag.Title = "Editar Plano de Cobrança";
+}
+
+<div class="col">
+    <div class="row gap-3 my-3 my-xl-5">
+        <form class="col-lg-6 d-grid gap-3 fs-5" asp-action="Editar">
+
+            <div>
+                <label class="control-label fw-semibold mb-1">Grupo de Veículos</label>
+                <select class="form-control mb-1" asp-for="GrupoDeAutomoveisId" asp-items="Model.GruposDeAutomoveis"></select>
+                <span class="text-danger fs-6" asp-validation-for="GrupoDeAutomoveisId"></span>
+            </div>
+
+            <hr>
+
+            <h2 class="text-primary fw-semibold mb-0">Plano Diário</h2>
+
+            <div>
+                <label class="control-label fw-semibold mb-1">Preço Diário (Plano Diário)</label>
+                <input class="form-control mb-1" asp-for="PrecoDiarioPlanoDiario" id="preco" oninput="formatarPreco(this)" />
+                <span class="text-danger fs-6" asp-validation-for="PrecoDiarioPlanoDiario"></span>
+            </div>
+
+            <div>
+                <label class="control-label fw-semibold mb-1">Preço por Km (Plano Diário)</label>
+                <input class="form-control mb-1" asp-for="PrecoQuilometroPlanoDiario" id="preco" oninput="formatarPreco(this)" />
+                <span class="text-danger fs-6" asp-validation-for="PrecoQuilometroPlanoDiario"></span>
+            </div>
+
+            <hr>
+
+            <h2 class="text-primary fw-semibold mb-0">Plano Controlado</h2>
+
+            <div>
+                <label class="control-label fw-semibold mb-1">Quilômetros Disponíveis (Plano Controlado)</label>
+                <input class="form-control mb-1" asp-for="QuilometrosDisponiveisPlanoControlado" id="preco" oninput="formatarPreco(this)" />
+                <span class="text-danger fs-6" asp-validation-for="QuilometrosDisponiveisPlanoControlado"></span>
+            </div>
+
+            <div>
+                <label class="control-label fw-semibold mb-1">Preço Diário (Plano Controlado)</label>
+                <input class="form-control mb-1" asp-for="PrecoDiarioPlanoControlado" id="preco" oninput="formatarPreco(this)" />
+                <span class="text-danger fs-6" asp-validation-for="PrecoDiarioPlanoControlado"></span>
+            </div>
+
+            <div>
+                <label class="control-label fw-semibold mb-1">Preço por Km Extrapolado (Plano Controlado)</label>
+                <input class="form-control mb-1" asp-for="PrecoQuilometroExtrapoladoPlanoControlado" id="preco" oninput="formatarPreco(this)" />
+                <span class="text-danger fs-6" asp-validation-for="PrecoQuilometroExtrapoladoPlanoControlado"></span>
+            </div>
+
+            <hr>
+
+            <h2 class="text-primary fw-semibold mb-0">Plano Livre</h2>
+
+            <div>
+                <label class="control-label fw-semibold mb-1">Preço Diário (Plano Livre)</label>
+                <input class="form-control mb-1" asp-for="PrecoDiarioPlanoLivre" id="preco" oninput="formatarPreco(this)" />
+                <span class="text-danger fs-6" asp-validation-for="PrecoDiarioPlanoLivre"></span>
+            </div>
+
+
+            <div class="d-grid gap-2 d-md-block mt-4">
+                <button class="btn btn-primary px-5">
+                    <i class="bi bi-floppy-fill me-1"></i>
+                    Gravar
+                </button>
+
+                <a class="btn btn-outline-primary px-5" asp-action="Listar">
+                    <i class="bi bi-arrow-return-left me-1"></i>
+                    Voltar
+                </a>
+            </div>
+        </form>
+    </div>
+</div>]
+<script>
+           function formatarPreco(element) {
+               let valor = element.value;
+               valor = valor.replace(/\D/g, "");
+               valor = (valor / 100).toFixed(2) + "";
+               valor = valor.replace(".", ",");
+               valor = valor.replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.");
+               element.value = valor;
+           }
+</script>

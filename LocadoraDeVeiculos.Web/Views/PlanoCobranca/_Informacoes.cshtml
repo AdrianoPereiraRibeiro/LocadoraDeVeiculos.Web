@@ -1,0 +1,19 @@
+﻿@model DetalhesPlanoCobrancaViewModel
+
+<div class="row gap-3 my-3 my-xl-5">
+    <label class="fs-4"><strong>Grupo de Veículos:</strong> @Model.GrupoDeAutomoveis</label>
+
+    <label class="fs-4"><strong>Preço Diário (Plano Diário):</strong> @Model.PrecoDiarioPlanoDiario.ToString("C2")</label>
+
+    <label class="fs-4"><strong>Preço por Km (Plano Diário):</strong> @Model.PrecoQuilometroPlanoDiario.ToString("C2")</label>
+
+    <label class="fs-4"><strong>Quilômetros Disponíveis (Plano Controlado):</strong> @Model.QuilometrosDisponiveisPlanoControlado km(s)</label>
+
+    <label class="fs-4"><strong>Preço Diário (Plano Controlado):</strong> @Model.PrecoDiarioPlanoControlado.ToString("C2")</label>
+
+    <label class="fs-4"><strong>Preço por Km Extrapolado (Plano Controlado):</strong> @Model.PrecoQuilometroExtrapoladoPlanoControlado.ToString("C2")</label>
+
+    <label class="fs-4"><strong>Preço Diário (Plano Livre):</strong> @Model.PrecoDiarioPlanoLivre.ToString("C2")</label>
+
+    <label class="fs-5"><strong>Id:</strong> [@Model.Id]</label>
+</div>

@@ -7,6 +7,7 @@
     var condutorAtivo = caminho.StartsWith("/condutor") ? "nav-link active fw-semibold" : "nav-link";
     var precosCombustiveisAtivo = caminho.StartsWith("/precosCombustiveis") ? "nav-link active fw-semibold" : "nav-link";
     var taxasEServicossAtivo = caminho.StartsWith("/taxaeservico") ? "nav-link active fw-semibold" : "nav-link";
+    var planoCobrancaAtivo = caminho.StartsWith("/planocobranca") ? "nav-link active fw-semibold" : "nav-link";
     // var funcionarioAtivo = caminho.StartsWith("/funcionario") ? "nav-link active fw-semibold" : "nav-link";
 }
 
@@ -33,6 +34,7 @@
                     <a class="px-4 @condutorAtivo" href="/condutor/listar">Condutores</a>
                     <a class="px-4 @precosCombustiveisAtivo" href="/precosCombustiveis/listar">Preços Combustíveis</a>
                     <a class="px-4 @taxasEServicossAtivo" href="/taxaeservico/listar">Taxas/Serviços</a>
+                    <a class="px-4 @planoCobrancaAtivo" href="/planocobranca/listar">Plano Cobranças</a>
                    @*  <a class="px-4 @funcionarioAtivo" href="/funcionario/listar">Funcionários</a>  *@
                 </div>
             </div>

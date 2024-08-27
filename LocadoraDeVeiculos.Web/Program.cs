@@ -14,6 +14,8 @@ using LocadoraDeVeiculos.Infraestrutura.ModuloPrecosCombustiveis;
 using LocadoraDeVeiculos.Infraestrutura.ModuloTaxaEServico;
 using LocadoraDeVeiculos.Service.Servicos;
 using LocadoraDeVeiculos.Web.Aplicacao.Servicos;
+using LocadoraDeVeiculos.Web.Dominio.ModuloPlanoCobranca;
+using LocadoraDeVeiculos.Web.Infra.Orm.ModuloPlanoCobranca;
 
 namespace LocadoraDeVeiculos.Web
 {
@@ -37,6 +39,10 @@ namespace LocadoraDeVeiculos.Web
             builder.Services.AddScoped<PrecosCombustiveisService>();
             builder.Services.AddScoped<IRepositorioTaxaEServico, RepositorioTaxaEServicoEmOrm>();
             builder.Services.AddScoped<TaxaEServicoService>();
+            builder.Services.AddScoped<IRepositorioPlanoCobranca, RepositorioPlanoCobrancaEmOrm>();
+            builder.Services.AddScoped<PlanoCobrancaService>();
+
+
 
             builder.Services.AddAutoMapper(cfg => { cfg.AddMaps(Assembly.GetExecutingAssembly()); });
 

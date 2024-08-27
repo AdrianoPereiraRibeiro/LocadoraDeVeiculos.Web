@@ -8,6 +8,7 @@ using LocadoraDeVeiculos.Dominio.ModuloVeiculo;
 using LocadoraDeVeiculos.Infra.Orm.ModuloVeiculo;
 using LocadoraDeVeiculos.Infraestrutura.ModuloPrecosCombustiveis;
 using LocadoraDeVeiculos.Infraestrutura.ModuloTaxaEServico;
+using LocadoraDeVeiculos.Web.Dominio.ModuloPlanoCobranca;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 
@@ -21,6 +22,7 @@ public class LocadoraDbContext : DbContext
     public DbSet<Condutor> Condutores { get; set; }
     public DbSet<PrecosCombustiveis> PrecosCombustiveis { get; set; }
     public DbSet<TaxaEServico> TaxasEServicos { get; set; }
+    public DbSet<PlanoCobranca> PlanosCobrancas { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
