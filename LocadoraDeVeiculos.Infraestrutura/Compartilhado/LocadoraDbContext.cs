@@ -1,4 +1,5 @@
 ﻿using ControleCinema.Infra.Orm.ModuloSala;
+using LocadoraDeVeiculos.Dominio.ModuloAluguel;
 using LocadoraDeVeiculos.Dominio.ModuloCliente;
 using LocadoraDeVeiculos.Dominio.ModuloCondutor;
 using LocadoraDeVeiculos.Dominio.ModuloGrupoDeAutomoveis;
@@ -23,6 +24,7 @@ public class LocadoraDbContext : DbContext
     public DbSet<PrecosCombustiveis> PrecosCombustiveis { get; set; }
     public DbSet<TaxaEServico> TaxasEServicos { get; set; }
     public DbSet<PlanoCobranca> PlanosCobrancas { get; set; }
+    public DbSet<Aluguel> Alugueis { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
