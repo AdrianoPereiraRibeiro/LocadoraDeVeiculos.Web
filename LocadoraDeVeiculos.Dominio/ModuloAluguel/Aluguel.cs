@@ -27,6 +27,7 @@ namespace LocadoraDeVeiculos.Dominio.ModuloAluguel
        public int PlanoId { get; set; }
         public PlanoCobranca Plano { get; set; }
         public List<TaxaEServico>? TaxasEServicos { get; set; } = [];
+        public bool AluguelAtivo { get; set; }
 
         protected Aluguel()
         {
@@ -45,7 +46,8 @@ namespace LocadoraDeVeiculos.Dominio.ModuloAluguel
             decimal valorTotal,
             PlanoCobranca plano,
             int planoId,
-            List<TaxaEServico> taxasEServicos
+            List<TaxaEServico> taxasEServicos,
+            bool aluguelAtivo
         )
         {
             Cliente = cliente;
@@ -61,6 +63,7 @@ namespace LocadoraDeVeiculos.Dominio.ModuloAluguel
             Plano = plano;
             PlanoId = planoId;
             TaxasEServicos = taxasEServicos;
+            AluguelAtivo = aluguelAtivo;
 
         }
 

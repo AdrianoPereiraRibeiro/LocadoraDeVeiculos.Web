@@ -70,5 +70,9 @@ public class MapeadorAluguel : IEntityTypeConfiguration<Aluguel>
 
         builder.HasMany(s => s.TaxasEServicos)
             .WithMany();
+
+        builder.Property(v => v.AluguelAtivo)
+            .IsRequired()
+            .HasColumnType("bit");
     }
 }
