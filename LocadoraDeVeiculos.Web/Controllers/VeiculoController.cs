@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using LocadoraDeVeiculos.Dominio.ModuloCliente;
 using LocadoraDeVeiculos.Dominio.ModuloVeiculo;
 using LocadoraDeVeiculos.Service.Servicos;
 using LocadoraDeVeiculos.Web.Aplicacao.Servicos;
@@ -28,7 +29,7 @@ public class VeiculoController : WebControllerBase
 
     public IActionResult Listar()
     {
-        var resultado = servico.SelecionarTodos();
+        var resultado = servico.SelecionarTodos(UsuarioId.GetValueOrDefault());
 
         if (resultado.IsFailed)
         {
@@ -56,6 +57,8 @@ public class VeiculoController : WebControllerBase
             return View(CarregarDadosFormulario(inserirVm));
 
         var veiculo = mapeador.Map<Veiculo>(inserirVm);
+
+        veiculo.UsuarioId = UsuarioId.GetValueOrDefault();
 
         var resultado = servico.Inserir(veiculo);
 

@@ -24,7 +24,7 @@ namespace LocadoraDeVeiculos.Web.Controllers
 
         public IActionResult Listar()
         {
-            var resultado = servico.SelecionarTodos();
+            var resultado = servico.SelecionarTodos(UsuarioId.GetValueOrDefault());
 
             if (resultado.IsFailed)
             {
@@ -52,6 +52,8 @@ namespace LocadoraDeVeiculos.Web.Controllers
                 return View();
 
             var cliente = mapeador.Map<Cliente>(inserirVm);
+
+            cliente.UsuarioId = UsuarioId.GetValueOrDefault();
 
             cliente.TipoPessoa = (TipoPessoa)inserirVm.TipoDePessoa;
 

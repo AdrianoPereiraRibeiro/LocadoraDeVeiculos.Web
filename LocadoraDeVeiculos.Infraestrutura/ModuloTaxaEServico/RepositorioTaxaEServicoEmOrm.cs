@@ -35,7 +35,9 @@ namespace LocadoraDeVeiculos.Infraestrutura.ModuloTaxaEServico
 
         public List<TaxaEServico> Filtrar(Func<TaxaEServico, bool> predicate)
         {
-            throw new NotImplementedException();
+            return ObterRegistros()
+                .Where(predicate)
+                .ToList();
         }
     }
 

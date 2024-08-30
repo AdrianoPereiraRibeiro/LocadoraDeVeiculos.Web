@@ -31,6 +31,8 @@ public class RepositorioVeiculoEmOrm : RepositorioBaseEmOrm<Veiculo>, IRepositor
 
     public List<Veiculo> Filtrar(Func<Veiculo, bool> predicate)
     {
-        throw new NotImplementedException();
+        return ObterRegistros()
+            .Where(predicate)
+            .ToList();
     }
 }

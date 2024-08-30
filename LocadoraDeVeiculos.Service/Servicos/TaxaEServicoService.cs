@@ -64,9 +64,8 @@ namespace LocadoraDeVeiculos.Service.Servicos
 
         public Result<List<TaxaEServico>> SelecionarTodos(int usuarioId)
         {
-            var taxasEServicos = repositorioTaxaEServico.SelecionarTodos();
-            //var salas = repositorioTaxaEServico
-            //    .Filtrar(f => f.UsuarioId == usuarioId);
+            var taxasEServicos = repositorioTaxaEServico
+                .Filtrar(f => f.UsuarioId == usuarioId);
 
             return Result.Ok(taxasEServicos);
         }

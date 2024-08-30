@@ -28,7 +28,7 @@ namespace LocadoraDeVeiculos.Web.Controllers
 
         public IActionResult Listar()
         {
-            var resultado = servico.SelecionarTodos(1);
+            var resultado = servico.SelecionarTodos(UsuarioId.GetValueOrDefault());
 
             if (resultado.IsFailed)
             {
@@ -57,6 +57,8 @@ namespace LocadoraDeVeiculos.Web.Controllers
 
             var condutor = mapeador.Map<Condutor>(inserirVm);
 
+            condutor.UsuarioId = UsuarioId.GetValueOrDefault();
+
             var resultado = servico.Inserir(condutor);
 
 
@@ -83,7 +85,7 @@ namespace LocadoraDeVeiculos.Web.Controllers
                 return RedirectToAction(nameof(Listar));
             }
 
-            var resultadoClientes = servicoClientes.SelecionarTodos();
+            var resultadoClientes = servicoClientes.SelecionarTodos(UsuarioId.GetValueOrDefault());
 
             if (resultadoClientes.IsFailed)
             {
@@ -182,7 +184,7 @@ namespace LocadoraDeVeiculos.Web.Controllers
         private FormularioCondutorViewModel? CarregarDadosFormulario(
             FormularioCondutorViewModel? dadosPrevios = null)
         {
-            var resutadoClientes = servicoClientes.SelecionarTodos();
+            var resutadoClientes = servicoClientes.SelecionarTodos(UsuarioId.GetValueOrDefault());
 
             if (resutadoClientes.IsFailed)
             {

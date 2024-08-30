@@ -5,6 +5,7 @@ using LocadoraDeVeiculos.Web.Dominio.ModuloPlanoCobranca;
 using LocadoraDeVeiculos.Web.Models;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.Mvc;
+using LocadoraDeVeiculos.Dominio.ModuloCliente;
 
 namespace LocadoraDeVeiculos.Web.Controllers
 {
@@ -26,7 +27,7 @@ namespace LocadoraDeVeiculos.Web.Controllers
 
         public IActionResult Listar()
         {
-            var resultado = service.SelecionarTodos();
+            var resultado = service.SelecionarTodos(UsuarioId.GetValueOrDefault());
 
             if (resultado.IsFailed)
             {
@@ -54,6 +55,8 @@ namespace LocadoraDeVeiculos.Web.Controllers
                 return View(CarregarDadosFormulario(inserirVm));
 
             var planoCobranca = mapeador.Map<PlanoCobranca>(inserirVm);
+
+            planoCobranca.UsuarioId = UsuarioId.GetValueOrDefault();
 
             var resultado = service.Inserir(planoCobranca);
 

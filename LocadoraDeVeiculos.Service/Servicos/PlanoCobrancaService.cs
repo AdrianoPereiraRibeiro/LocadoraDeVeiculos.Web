@@ -1,5 +1,6 @@
 ﻿using FluentResults;
 using LocadoraDeVeiculos.Web.Dominio.ModuloPlanoCobranca;
+using LocadoraDeVeiculos.Web.Dominio.ModuloUsuario;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -66,9 +67,10 @@ namespace LocadoraDeVeiculos.Service.Servicos
             return Result.Ok(planoCobranca);
         }
 
-        public Result<List<PlanoCobranca>> SelecionarTodos()
+        public Result<List<PlanoCobranca>> SelecionarTodos(int usuarioId)
         {
-            var planosCobranca = repositorioPlanoCobranca.SelecionarTodos();
+            var planosCobranca = repositorioPlanoCobranca
+                .Filtrar(f => f.UsuarioId == usuarioId);
 
             return Result.Ok(planosCobranca);
         }

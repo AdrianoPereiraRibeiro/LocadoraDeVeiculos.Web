@@ -1,5 +1,6 @@
 ﻿using FluentResults;
 using LocadoraDeVeiculos.Dominio.ModuloVeiculo;
+using LocadoraDeVeiculos.Web.Dominio.ModuloUsuario;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -64,22 +65,13 @@ namespace LocadoraDeVeiculos.Service.Servicos
             return Result.Ok(veiculo);
         }
 
-        public Result<List<Veiculo>> SelecionarTodos()
+        public Result<List<Veiculo>> SelecionarTodos(int usuarioId)
         {
-            var veiculos = repositorioVeiculo.SelecionarTodos();
+            var veiculos = repositorioVeiculo
+                .Filtrar(f => f.UsuarioId == usuarioId);
 
             return Result.Ok(veiculos);
         }
-
-        //public byte[] CarregarImagem(string caminhoArquivo)
-        //{
-        //    return File.ReadAllBytes(caminhoArquivo);
-        //}
-
-        //public void SalvarImagem(byte[] imagem, string caminhoArquivo)
-        //{
-        //    File.WriteAllBytes(caminhoArquivo, imagem);
-        //}
 
     }
 }

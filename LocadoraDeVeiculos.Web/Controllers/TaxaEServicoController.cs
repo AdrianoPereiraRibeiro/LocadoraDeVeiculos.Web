@@ -23,7 +23,7 @@ namespace LocadoraDeVeiculos.Web.Controllers
         public IActionResult Listar()
         {
             var resultado =
-                servicoTaxaEServico.SelecionarTodos(1);
+                servicoTaxaEServico.SelecionarTodos(UsuarioId.GetValueOrDefault());
 
             if (resultado.IsFailed)
             {
@@ -55,7 +55,7 @@ namespace LocadoraDeVeiculos.Web.Controllers
 
             var novaTaxaEServico = mapeador.Map<TaxaEServico>(inserirTaxaEServicoVm);
 
-            //novaSala.UsuarioId = UsuarioId.GetValueOrDefault();
+            novaTaxaEServico.UsuarioId = UsuarioId.GetValueOrDefault();
 
             var resultado = servicoTaxaEServico.Inserir(novaTaxaEServico);
 

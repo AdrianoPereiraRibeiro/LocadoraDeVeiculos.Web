@@ -71,9 +71,10 @@ namespace LocadoraDeVeiculos.Service.Servicos
             return Result.Ok(cliente);
         }
 
-        public Result<List<Cliente>> SelecionarTodos()
+        public Result<List<Cliente>> SelecionarTodos(int usuarioId)
         {
-            var clientes = repositorioCliente.SelecionarTodos();
+            var clientes = repositorioCliente
+                .Filtrar(f => f.UsuarioId == usuarioId);
 
             return Result.Ok(clientes);
         }

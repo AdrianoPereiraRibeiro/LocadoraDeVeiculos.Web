@@ -11,7 +11,7 @@ public class MapeadorAluguel : IEntityTypeConfiguration<Aluguel>
 {
     public void Configure(EntityTypeBuilder<Aluguel> builder)
     {
-        builder.ToTable("TBCliente");
+        builder.ToTable("TBAluguel");
 
         builder.Property(v => v.Id)
             .HasColumnType("int")
@@ -74,5 +74,15 @@ public class MapeadorAluguel : IEntityTypeConfiguration<Aluguel>
         builder.Property(v => v.AluguelAtivo)
             .IsRequired()
             .HasColumnType("bit");
+
+        builder.Property(s => s.UsuarioId)
+            .IsRequired()
+            .HasColumnType("int")
+            .HasColumnName("Usuario_Id");
+
+        builder.HasOne(g => g.Usuario)
+            .WithMany()
+            .HasForeignKey(s => s.UsuarioId)
+            .OnDelete(DeleteBehavior.NoAction);
     }
 }

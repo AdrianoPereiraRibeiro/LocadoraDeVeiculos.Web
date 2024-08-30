@@ -24,7 +24,7 @@ public class GrupoDeAutomoveisController : WebControllerBase
     public IActionResult Listar()
     {
         var resultado = 
-            servicoGrupoDeAutomoveis.SelecionarTodos(1);
+            servicoGrupoDeAutomoveis.SelecionarTodos(UsuarioId.GetValueOrDefault());
 
         if (resultado.IsFailed)
         {
@@ -56,7 +56,7 @@ public class GrupoDeAutomoveisController : WebControllerBase
 
         var novoGrupoDeAutomoveis = mapeador.Map<GrupoDeAutomoveis>(inserirGrupoDeAutomoveisVm);
 
-        //novaSala.UsuarioId = UsuarioId.GetValueOrDefault();
+        novoGrupoDeAutomoveis.UsuarioId = UsuarioId.GetValueOrDefault();
 
         var resultado = servicoGrupoDeAutomoveis.Inserir(novoGrupoDeAutomoveis);
 

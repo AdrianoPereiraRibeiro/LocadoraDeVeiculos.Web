@@ -32,6 +32,8 @@ public class RepositorioPlanoCobrancaEmOrm : RepositorioBaseEmOrm<PlanoCobranca>
 
     public List<PlanoCobranca> Filtrar(Func<PlanoCobranca, bool> predicate)
     {
-        throw new NotImplementedException();
+        return ObterRegistros()
+            .Where(predicate)
+            .ToList();
     }
 }

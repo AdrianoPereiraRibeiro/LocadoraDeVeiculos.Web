@@ -33,6 +33,8 @@ public class RepositorioAluguelEmOrm : RepositorioBaseEmOrm<Aluguel>, IRepositor
 
     public List<Aluguel> Filtrar(Func<Aluguel, bool> predicate)
     {
-        throw new NotImplementedException();
+        return ObterRegistros()
+            .Where(predicate)
+            .ToList();
     }
 }

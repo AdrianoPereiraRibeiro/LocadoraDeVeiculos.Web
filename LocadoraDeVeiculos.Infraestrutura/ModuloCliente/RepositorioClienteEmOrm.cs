@@ -30,6 +30,8 @@ public class RepositorioClienteEmOrm : RepositorioBaseEmOrm<Cliente>, IRepositor
 
     public List<Cliente> Filtrar(Func<Cliente, bool> predicate)
     {
-        throw new NotImplementedException();
+        return ObterRegistros()
+            .Where(predicate)
+            .ToList();
     }
 }

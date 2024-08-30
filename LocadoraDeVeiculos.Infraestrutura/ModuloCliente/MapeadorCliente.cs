@@ -57,5 +57,15 @@ public class MapeadorCliente : IEntityTypeConfiguration<Cliente>
         builder.Property(v => v.Numero)
             .HasColumnType("varchar(100)")
             .IsRequired();
+
+        builder.Property(s => s.UsuarioId)
+            .IsRequired()
+            .HasColumnType("int")
+            .HasColumnName("Usuario_Id");
+
+        builder.HasOne(g => g.Usuario)
+            .WithMany()
+            .HasForeignKey(s => s.UsuarioId)
+            .OnDelete(DeleteBehavior.NoAction);
     }
 }
