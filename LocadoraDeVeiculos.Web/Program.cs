@@ -1,6 +1,7 @@
 
 using System.Reflection;
 using ControleCinema.Infra.Orm.ModuloSala;
+using LocadoraDeVeiculos.Dominio.ModuloAluguel;
 using LocadoraDeVeiculos.Dominio.ModuloCliente;
 using LocadoraDeVeiculos.Dominio.ModuloCondutor;
 using LocadoraDeVeiculos.Dominio.ModuloGrupoDeAutomoveis;
@@ -15,7 +16,10 @@ using LocadoraDeVeiculos.Infraestrutura.ModuloTaxaEServico;
 using LocadoraDeVeiculos.Service.Servicos;
 using LocadoraDeVeiculos.Web.Aplicacao.Servicos;
 using LocadoraDeVeiculos.Web.Dominio.ModuloPlanoCobranca;
+using LocadoraDeVeiculos.Web.Dominio.ModuloUsuario;
 using LocadoraDeVeiculos.Web.Infra.Orm.ModuloPlanoCobranca;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Identity;
 
 namespace LocadoraDeVeiculos.Web
 {
@@ -41,7 +45,36 @@ namespace LocadoraDeVeiculos.Web
             builder.Services.AddScoped<TaxaEServicoService>();
             builder.Services.AddScoped<IRepositorioPlanoCobranca, RepositorioPlanoCobrancaEmOrm>();
             builder.Services.AddScoped<PlanoCobrancaService>();
+            builder.Services.AddScoped<IRepositorioAluguel, RepositorioAluguelEmOrm>();
+            builder.Services.AddScoped<AluguelService>();
 
+            builder.Services.AddIdentity<Usuario, Perfil>()
+                .AddEntityFrameworkStores<LocadoraDbContext>()
+                .AddDefaultTokenProviders();
+
+            builder.Services.Configure<IdentityOptions>(options =>
+            {
+                options.Password.RequireDigit = false;
+                options.Password.RequireLowercase = false;
+                options.Password.RequireUppercase = false;
+                options.Password.RequireNonAlphanumeric = false;
+                options.Password.RequiredLength = 3;
+                options.Password.RequiredUniqueChars = 1;
+            });
+
+            builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+                .AddCookie(options =>
+                {
+                    options.Cookie.Name = "AspNetCore.Cookies";
+                    options.ExpireTimeSpan = TimeSpan.FromMinutes(5);
+                    options.SlidingExpiration = true;
+                });
+
+            builder.Services.ConfigureApplicationCookie(options =>
+            {
+                options.LoginPath = "/Usuario/Login";
+                options.AccessDeniedPath = "/Usuario/AcessoNegado";
+            });
 
 
             builder.Services.AddAutoMapper(cfg => { cfg.AddMaps(Assembly.GetExecutingAssembly()); });

@@ -18,31 +18,19 @@ public class MapeadorAluguel : IEntityTypeConfiguration<Aluguel>
             .ValueGeneratedOnAdd()
             .IsRequired();
 
-        builder.Property(v => v.ClienteId)
-            .HasColumnType("int")
-            .IsRequired();
-
-        builder.HasOne(v => v.Cliente)
+        builder.HasOne(s => s.Cliente)
             .WithMany()
-            .HasForeignKey(v => v.ClienteId)
-            .OnDelete(DeleteBehavior.Restrict);
-       
-        builder.Property(v => v.GrupoDeAutomoveisId)
-            .HasColumnType("int")
-            .IsRequired();
-
-        builder.HasOne(v => v.GrupoDeAutomoveis)
-            .WithMany()
-            .HasForeignKey(v => v.GrupoDeAutomoveisId)
+            .HasForeignKey("Cliente_Id")
             .OnDelete(DeleteBehavior.Restrict);
 
-        builder.Property(v => v.VeiculoId)
-            .HasColumnType("int")
-            .IsRequired();
-
-        builder.HasOne(v => v.Veiculo)
+        builder.HasOne(s => s.GrupoDeAutomoveis)
             .WithMany()
-            .HasForeignKey(v => v.VeiculoId)
+            .HasForeignKey("GrupoDeAutomoveis_Id")
+            .OnDelete(DeleteBehavior.Restrict);
+
+        builder.HasOne(s => s.Veiculo)
+            .WithMany()
+            .HasForeignKey("Veiculo_Id")
             .OnDelete(DeleteBehavior.Restrict);
 
         builder.Property(s => s.DataSaida)
@@ -59,13 +47,9 @@ public class MapeadorAluguel : IEntityTypeConfiguration<Aluguel>
         builder.Property(s => s.ValorTotal)
             .HasColumnType("decimal(18, 2)");
 
-        builder.Property(v => v.PlanoId)
-            .HasColumnType("int")
-            .IsRequired();
-
-        builder.HasOne(v => v.Plano)
+        builder.HasOne(s => s.Plano)
             .WithMany()
-            .HasForeignKey(v => v.PlanoId)
+            .HasForeignKey("Plano_Id")
             .OnDelete(DeleteBehavior.Restrict);
 
         builder.HasMany(s => s.TaxasEServicos)

@@ -14,17 +14,14 @@ namespace LocadoraDeVeiculos.Dominio.ModuloAluguel
 {
     public class Aluguel : EntidadeBase
     {
-        public int ClienteId { get; set; }
+
         public Cliente Cliente{ get; set; }
-        public int GrupoDeAutomoveisId { get; set; }
         public GrupoDeAutomoveis GrupoDeAutomoveis { get; set; }
-        public int VeiculoId { get; set; }
         public Veiculo Veiculo { get; set; }
         public DateTime DataSaida { get; set; }
         public DateTime? DataRetorno { get; set; }
         public decimal ValorEntrada { get; set; }
         public decimal? ValorTotal { get; set; }
-       public int PlanoId { get; set; }
         public PlanoCobranca Plano { get; set; }
         public List<TaxaEServico>? TaxasEServicos { get; set; } = [];
         public bool AluguelAtivo { get; set; }
@@ -35,33 +32,25 @@ namespace LocadoraDeVeiculos.Dominio.ModuloAluguel
 
         public Aluguel(
             Cliente cliente,
-            int clienteId,
             GrupoDeAutomoveis grupoDeAutomoveis,
-            int grupoDeAutomoveisId,
             Veiculo veiculo,
-            int veiculoId,
             DateTime dataSaida,
             DateTime dataRetorno,
             decimal valorEntrada,
             decimal valorTotal,
             PlanoCobranca plano,
-            int planoId,
             List<TaxaEServico> taxasEServicos,
             bool aluguelAtivo
         )
         {
             Cliente = cliente;
-            ClienteId = clienteId;
             GrupoDeAutomoveis = grupoDeAutomoveis;
-            GrupoDeAutomoveisId = grupoDeAutomoveisId;
             Veiculo = veiculo;
-            VeiculoId = veiculoId;
             DataSaida = dataSaida;
             DataRetorno = dataRetorno;
             ValorEntrada = valorEntrada;
             ValorTotal = valorTotal;
             Plano = plano;
-            PlanoId = planoId;
             TaxasEServicos = taxasEServicos;
             AluguelAtivo = aluguelAtivo;
 

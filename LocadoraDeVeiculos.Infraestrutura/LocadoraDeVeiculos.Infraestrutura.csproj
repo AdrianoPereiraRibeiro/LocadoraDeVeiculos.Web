@@ -17,4 +17,8 @@
     <ProjectReference Include="..\LocadoraDeVeiculos.Dominio\LocadoraDeVeiculos.Dominio.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Migrations\" />
+  </ItemGroup>
+
 </Project>

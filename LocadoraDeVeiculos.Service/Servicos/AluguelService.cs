@@ -33,17 +33,13 @@ namespace LocadoraDeVeiculos.Service.Servicos
                 return Result.Fail("O aluguel não foi encontrado!");
 
             aluguel.Cliente = aluguelAtualizado.Cliente;
-            aluguel.ClienteId = aluguelAtualizado.ClienteId;
             aluguel.GrupoDeAutomoveis= aluguelAtualizado.GrupoDeAutomoveis;
-            aluguel.GrupoDeAutomoveisId = aluguelAtualizado.GrupoDeAutomoveisId;
             aluguel.Veiculo = aluguelAtualizado.Veiculo;
-            aluguel.VeiculoId = aluguelAtualizado.VeiculoId;
             aluguel.DataSaida = aluguelAtualizado.DataSaida;
             aluguel.DataRetorno = aluguelAtualizado.DataRetorno;
             aluguel.ValorEntrada = aluguelAtualizado.ValorEntrada;
             aluguel.ValorTotal = aluguelAtualizado.ValorTotal;
             aluguel.Plano = aluguelAtualizado.Plano;
-            aluguel.PlanoId = aluguelAtualizado.PlanoId;
             aluguel.TaxasEServicos = aluguelAtualizado.TaxasEServicos;
 
             repositorioAluguel.Editar(aluguel);

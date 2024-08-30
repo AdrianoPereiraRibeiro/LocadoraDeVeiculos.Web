@@ -6,16 +6,19 @@ using LocadoraDeVeiculos.Dominio.ModuloGrupoDeAutomoveis;
 using LocadoraDeVeiculos.Dominio.ModuloPrecosCombustiveis;
 using LocadoraDeVeiculos.Dominio.ModuloTaxaEServico;
 using LocadoraDeVeiculos.Dominio.ModuloVeiculo;
+using LocadoraDeVeiculos.Infra.Orm.ModuloAluguel;
 using LocadoraDeVeiculos.Infra.Orm.ModuloVeiculo;
 using LocadoraDeVeiculos.Infraestrutura.ModuloPrecosCombustiveis;
 using LocadoraDeVeiculos.Infraestrutura.ModuloTaxaEServico;
 using LocadoraDeVeiculos.Web.Dominio.ModuloPlanoCobranca;
+using LocadoraDeVeiculos.Web.Dominio.ModuloUsuario;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 
 namespace LocadoraDeVeiculos.Infra.Orm.Compartilhado;
 
-public class LocadoraDbContext : DbContext
+public class LocadoraDbContext : IdentityDbContext<Usuario, Perfil, int>
 {
     public DbSet<GrupoDeAutomoveis> GrupoDeAutomoveis { get; set; }
     public DbSet<Veiculo> Veiculos { get; set; }
@@ -47,6 +50,7 @@ public class LocadoraDbContext : DbContext
         modelBuilder.ApplyConfiguration(new MapeadorCondutorEmOrm());
         modelBuilder.ApplyConfiguration(new MapeadorPrecosCombustiveisEmOrm());
         modelBuilder.ApplyConfiguration(new MapeadorTaxaEServicoEmOrm());
+        modelBuilder.ApplyConfiguration(new MapeadorAluguel());
         
 
         base.OnModelCreating(modelBuilder);
