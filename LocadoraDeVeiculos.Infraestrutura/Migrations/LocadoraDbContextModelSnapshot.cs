@@ -34,7 +34,7 @@ namespace LocadoraDeVeiculos.Infraestrutura.Migrations
 
                     b.HasIndex("TaxasEServicosId");
 
-                    b.ToTable("AluguelTaxaEServico");
+                    b.ToTable("AluguelTaxaEServico", (string)null);
                 });
 
             modelBuilder.Entity("LocadoraDeVeiculos.Dominio.ModuloAluguel.Aluguel", b =>
@@ -49,6 +49,9 @@ namespace LocadoraDeVeiculos.Infraestrutura.Migrations
                         .HasColumnType("bit");
 
                     b.Property<int>("Cliente_Id")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Condutor_Id")
                         .HasColumnType("int");
 
                     b.Property<DateTime?>("DataRetorno")
@@ -79,6 +82,8 @@ namespace LocadoraDeVeiculos.Infraestrutura.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("Cliente_Id");
+
+                    b.HasIndex("Condutor_Id");
 
                     b.HasIndex("GrupoDeAutomoveis_Id");
 
@@ -362,7 +367,7 @@ namespace LocadoraDeVeiculos.Infraestrutura.Migrations
 
                     b.HasIndex("UsuarioId");
 
-                    b.ToTable("PlanosCobrancas");
+                    b.ToTable("PlanosCobrancas", (string)null);
                 });
 
             modelBuilder.Entity("LocadoraDeVeiculos.Web.Dominio.ModuloUsuario.Perfil", b =>
@@ -589,6 +594,12 @@ namespace LocadoraDeVeiculos.Infraestrutura.Migrations
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
+                    b.HasOne("LocadoraDeVeiculos.Dominio.ModuloCondutor.Condutor", "Condutor")
+                        .WithMany()
+                        .HasForeignKey("Condutor_Id")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
                     b.HasOne("LocadoraDeVeiculos.Dominio.ModuloGrupoDeAutomoveis.GrupoDeAutomoveis", "GrupoDeAutomoveis")
                         .WithMany()
                         .HasForeignKey("GrupoDeAutomoveis_Id")
@@ -614,6 +625,8 @@ namespace LocadoraDeVeiculos.Infraestrutura.Migrations
                         .IsRequired();
 
                     b.Navigation("Cliente");
+
+                    b.Navigation("Condutor");
 
                     b.Navigation("GrupoDeAutomoveis");
 

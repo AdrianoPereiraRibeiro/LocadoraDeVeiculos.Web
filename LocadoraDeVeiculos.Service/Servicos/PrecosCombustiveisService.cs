@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using LocadoraDeVeiculos.Dominio.ModuloPrecosCombustiveis;
 using LocadoraDeVeiculos.Dominio.ModuloCliente;
+using LocadoraDeVeiculos.Web.Dominio.ModuloUsuario;
 
 namespace LocadoraDeVeiculos.Service.Servicos
 {
@@ -53,10 +54,10 @@ namespace LocadoraDeVeiculos.Service.Servicos
             return Result.Ok(precosCombustiveis);
         }
 
-        public Result<List<PrecosCombustiveis>> SelecionarTodos()
+        public Result<List<PrecosCombustiveis>> SelecionarTodos(int usuarioId)
         {
             var precos
-                = repositorioPrecosCombustiveis.SelecionarTodos();
+                = repositorioPrecosCombustiveis.Filtrar(f => f.UsuarioId == usuarioId);
 
             return Result.Ok(precos);
         }

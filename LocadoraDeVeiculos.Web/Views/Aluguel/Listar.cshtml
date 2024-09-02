@@ -1,0 +1,75 @@
+﻿@model IEnumerable<ListarAluguelViewModel>
+
+@{
+    ViewBag.Title = "Listagem de Aluguéis";
+}
+
+<div class="col">
+
+    <a class="btn btn-primary px-4 mt-3" asp-controller="Aluguel" asp-action="Inserir">
+        <i class="bi bi-circle-add"></i>
+        Inserir Novo Aluguel
+    </a>
+
+    <div class="row gap-2 my-3 my-xl-5">
+        @foreach (var aluguelVm in Model)
+        {
+        <div class="card col-lg-4 col-xl-3 px-0">
+            <div class="card-header bg-transparent d-flex justify-content-between align-items-center">
+                <h5 class="p-0">Locação #@aluguelVm.Id</h5>
+
+                <div class="text-end d-flex align-items-center gap-3">
+                    @if (!aluguelVm.DataDevolucao.HasValue)
+                    {
+                        <a title="Realizar Devolução"
+                           class="text-info-emphasis fs-5"
+                           href="/Aluguel/RealizarDevolucao/@aluguelVm.Id">
+                            <i class="bi bi-coin"></i>
+                        </a>
+                    }
+                    <a title="Detalhes"
+                       class="text-info-emphasis fs-5"
+                       href="/Aluguel/Detalhes/@aluguelVm.Id">
+                        <i class="bi bi-search"></i>
+                    </a>
+                    @if (!aluguelVm.DataDevolucao.HasValue)
+                    {
+                        <a title="Editar"
+                           class="text-info-emphasis fs-5"
+                           href="/Aluguel/Editar/@aluguelVm.Id">
+                            <i class="bi bi-pencil"></i>
+                        </a>    
+                    }
+                    @if (aluguelVm.DataDevolucao.HasValue)
+                    {
+                        <a title="Excluir"
+                           class="text-info-emphasis fs-5" href="/Aluguel/Excluir/@aluguelVm.Id">
+                            <i class="bi bi-trash-fill"></i>
+                        </a>
+                    }
+                </div>
+            </div>
+
+            <div class="card-body">
+                <h5 class="card-title">Veículo: @aluguelVm.Veiculo</h5>
+                <p class="card-text">
+                    Condutor: @aluguelVm.Condutor <br />
+                    Tipo de Plano: @aluguelVm.TipoPlano <br />
+
+                    <hr>
+        
+                    Devolução: @(aluguelVm.DataDevolucao.HasValue ? "Completa" : "Pendente")<br />
+                    Data da Locação: @aluguelVm.DataLocacao.ToShortDateString()<br />
+                    Data Prevista de Devolução: @aluguelVm.DevolucaoPrevista.ToShortDateString()<br />
+                    
+                    @if (aluguelVm.DataDevolucao.HasValue)
+                    { 
+                        <span>Data de Devolução: @aluguelVm.DataDevolucao.Value.ToShortDateString()</span><br />
+                        <span>Quilometragem Percorrida: @aluguelVm.QuilometragemPercorrida km(s)</span><br />
+                    }
+                </p>
+            </div>
+        </div>
+        }
+    </div>
+</div>

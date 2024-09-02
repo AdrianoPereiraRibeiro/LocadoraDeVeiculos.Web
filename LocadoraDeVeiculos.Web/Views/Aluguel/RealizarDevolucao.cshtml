@@ -1,0 +1,80 @@
+﻿@using LocadoraDeVeiculos.Dominio.ModuloLocacao
+@using Microsoft.AspNetCore.Mvc.TagHelpers
+
+@model RealizarDevolucaoViewModel
+
+@{
+    ViewBag.Title = "Realizar Devolução de Locação";
+}
+
+<div class="col">
+    <div class="row gap-3 my-3 my-xl-5">
+        <form class="col-lg-6 d-grid gap-3 fs-5" asp-action="RealizarDevolucao">
+
+            <div class="form-group">
+                <label class="control-label fw-semibold mb-1">Id</label>
+                <input class="form-control mb-1" asp-for="Id" readonly/>
+            </div>
+            
+            <div class="form-group">
+                <label class="control-label fw-semibold mb-1">Veículo</label>
+                <select class="form-control mb-1" asp-for="VeiculoId" asp-items="Model.Veiculos" readonly></select>
+                <span class="text-danger fs-6" asp-validation-for="VeiculoId"></span>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label fw-semibold mb-1">Condutor</label>
+                <select class="form-control mb-1" asp-for="CondutorId" asp-items="Model.Condutores" readonly></select>
+                <span class="text-danger fs-6" asp-validation-for="CondutorId"></span>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label fw-semibold mb-1">Tipo de Plano</label>
+                <select class="form-control mb-1" asp-for="TipoPlano" asp-items="Html.GetEnumSelectList<TipoPlanoCobrancaEnum>()" readonly></select>
+                <span class="text-danger fs-6" asp-validation-for="TipoPlano"></span>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label fw-semibold mb-1">Marcador de Combustível</label>
+                <select class="form-control mb-1" asp-for="MarcadorCombustivel" asp-items="Html.GetEnumSelectList<MarcadorCombustivelEnum>()"></select>
+                <span class="text-danger fs-6" asp-validation-for="MarcadorCombustivel"></span>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label fw-semibold mb-1">Quilometragem Percorrida</label>
+                <input class="form-control mb-1" asp-for="QuilometragemPercorrida" type="number"/>
+                <span class="text-danger fs-6" asp-validation-for="QuilometragemPercorrida"></span>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label fw-semibold mb-1">Data da Locação</label>
+                <input class="form-control mb-1" asp-for="DataLocacao" type="date" readonly/>
+                <span class="text-danger fs-6" asp-validation-for="DataLocacao"></span>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label fw-semibold mb-1">Data Prevista de Devolução</label>
+                <input class="form-control mb-1" asp-for="DevolucaoPrevista" type="date" readonly/>
+                <span class="text-danger fs-6" asp-validation-for="DevolucaoPrevista"></span>
+            </div>
+  
+            <div class="form-group">
+                <label class="control-label fw-semibold mb-1">Taxas Selecionadas</label>
+                <select class="form-control mb-1" asp-for="TaxasSelecionadas" asp-items="Model.Taxas" multiple></select>
+                <span class="text-danger fs-6" asp-validation-for="TaxasSelecionadas"></span>
+            </div>
+
+            <div class="d-grid gap-2 d-md-block mt-4">
+                <button class="btn btn-primary px-5">
+                    <i class="bi bi-floppy-fill me-1"></i>
+                    Gravar
+                </button>
+
+                <a class="btn btn-outline-primary px-5" asp-action="Listar">
+                    <i class="bi bi-arrow-return-left me-1"></i>
+                    Voltar
+                </a>
+            </div>
+        </form>
+    </div>
+</div>

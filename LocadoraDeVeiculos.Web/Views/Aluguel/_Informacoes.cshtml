@@ -1,0 +1,30 @@
+﻿@model DetalhesAluguelViewModel
+
+<div class="row gap-3 my-3 my-xl-5">
+    <label class="fs-4"><strong>Cliente:</strong> @Model.Cliente</label>
+  
+    <label class="fs-4"><strong>Veículo:</strong> @Model.Veiculo</label>
+
+    <label class="fs-4"><strong>Condutor:</strong> @Model.Condutor</label>
+
+    <label class="fs-4"><strong>Tipo de Plano:</strong> @Model.TipoPlano</label>
+
+    <label class="fs-4"><strong>Marcador de Combustível:</strong> @Model.MarcadorCombustivel</label>
+
+    <label class="fs-4"><strong>Quilometragem Percorrida:</strong> @Model.QuilometragemPercorrida km</label>
+
+    <label class="fs-4"><strong>Data de Locação:</strong> @Model.DataLocacao.ToShortDateString()</label>
+
+    <label class="fs-4"><strong>Devolução Prevista:</strong> @Model.DevolucaoPrevista.ToShortDateString()</label>
+
+    @if(Model.DataDevolucao.HasValue)
+    {
+        <label class="fs-4"><strong>Data de Devolução:</strong> @Model.DataDevolucao.Value.ToShortDateString()</label>
+    }
+    else
+    {
+        <label class="fs-4"><strong>Data de Devolução:</strong> Não devolvido</label>
+    }
+
+    <label class="fs-5"><strong>Id:</strong> [@Model.Id]</label>
+</div>

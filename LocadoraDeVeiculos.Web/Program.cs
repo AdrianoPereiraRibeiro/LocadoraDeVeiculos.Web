@@ -15,9 +15,11 @@ using LocadoraDeVeiculos.Infraestrutura.ModuloPrecosCombustiveis;
 using LocadoraDeVeiculos.Infraestrutura.ModuloTaxaEServico;
 using LocadoraDeVeiculos.Service.Servicos;
 using LocadoraDeVeiculos.Web.Aplicacao.Servicos;
+using LocadoraDeVeiculos.Web.Dominio.ModuloAluguel;
 using LocadoraDeVeiculos.Web.Dominio.ModuloPlanoCobranca;
 using LocadoraDeVeiculos.Web.Dominio.ModuloUsuario;
 using LocadoraDeVeiculos.Web.Infra.Orm.ModuloPlanoCobranca;
+using LocadoraDeVeiculos.Web.Service.Servicos;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Identity;
 

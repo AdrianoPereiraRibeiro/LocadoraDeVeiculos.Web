@@ -25,7 +25,7 @@ namespace LocadoraDeVeiculos.Web.Controllers
         public IActionResult Listar()
         {
             var resultado =
-                service.SelecionarTodos();
+                service.SelecionarTodos(UsuarioId.GetValueOrDefault());
 
             if (resultado.Value.Count == 0)
             {
@@ -34,6 +34,7 @@ namespace LocadoraDeVeiculos.Web.Controllers
                 precosPadrao.PrecoDiesel = 1;
                 precosPadrao.PrecoGas = 1;
                 precosPadrao.PrecoAlcool = 1;
+                precosPadrao.UsuarioId = UsuarioId.GetValueOrDefault();
                 service.Inserir(precosPadrao);
             }
 

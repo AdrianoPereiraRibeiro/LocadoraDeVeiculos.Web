@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using LocadoraDeVeiculos.Dominio.ModuloCliente;
+using LocadoraDeVeiculos.Dominio.ModuloCondutor;
 using LocadoraDeVeiculos.Dominio.ModuloGrupoDeAutomoveis;
 using LocadoraDeVeiculos.Dominio.ModuloTaxaEServico;
 using LocadoraDeVeiculos.Web.Dominio.ModuloPlanoCobranca;
@@ -16,6 +17,7 @@ namespace LocadoraDeVeiculos.Dominio.ModuloAluguel
     {
 
         public Cliente Cliente{ get; set; }
+        public Condutor Condutor { get; set; }
         public GrupoDeAutomoveis GrupoDeAutomoveis { get; set; }
         public Veiculo Veiculo { get; set; }
         public DateTime DataSaida { get; set; }
@@ -32,6 +34,7 @@ namespace LocadoraDeVeiculos.Dominio.ModuloAluguel
 
         public Aluguel(
             Cliente cliente,
+            Condutor condutor,
             GrupoDeAutomoveis grupoDeAutomoveis,
             Veiculo veiculo,
             DateTime dataSaida,
@@ -44,6 +47,7 @@ namespace LocadoraDeVeiculos.Dominio.ModuloAluguel
         )
         {
             Cliente = cliente;
+            Condutor = condutor;
             GrupoDeAutomoveis = grupoDeAutomoveis;
             Veiculo = veiculo;
             DataSaida = dataSaida;
@@ -62,6 +66,9 @@ namespace LocadoraDeVeiculos.Dominio.ModuloAluguel
 
             if (Cliente.Equals(null))
                 erros.Add("O cliente é obrigatório");
+
+            if (Condutor.Equals(null))
+                erros.Add("O condutor é obrigatório");
 
             if (GrupoDeAutomoveis.Equals(null))
                 erros.Add("O grupo de automóveis é obrigatório");

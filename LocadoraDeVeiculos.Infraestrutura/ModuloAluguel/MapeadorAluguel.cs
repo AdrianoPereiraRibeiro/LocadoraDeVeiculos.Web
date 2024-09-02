@@ -23,6 +23,11 @@ public class MapeadorAluguel : IEntityTypeConfiguration<Aluguel>
             .HasForeignKey("Cliente_Id")
             .OnDelete(DeleteBehavior.Restrict);
 
+        builder.HasOne(s => s.Condutor)
+            .WithMany()
+            .HasForeignKey("Condutor_Id")
+            .OnDelete(DeleteBehavior.Restrict);
+
         builder.HasOne(s => s.GrupoDeAutomoveis)
             .WithMany()
             .HasForeignKey("GrupoDeAutomoveis_Id")

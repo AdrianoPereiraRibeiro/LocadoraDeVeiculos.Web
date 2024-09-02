@@ -1,13 +1,9 @@
 ﻿using FluentResults;
 using LocadoraDeVeiculos.Dominio.ModuloAluguel;
-using LocadoraDeVeiculos.Dominio.ModuloCliente;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using LocadoraDeVeiculos.Web.Dominio.ModuloAluguel;
+using LocadoraDeVeiculos.Web.Dominio.ModuloUsuario;
 
-namespace LocadoraDeVeiculos.Service.Servicos
+namespace LocadoraDeVeiculos.Web.Service.Servicos
 {
     public class AluguelService
     {
@@ -25,6 +21,20 @@ namespace LocadoraDeVeiculos.Service.Servicos
             return Result.Ok(aluguel);
         }
 
+        public Result<Aluguel> RealizarDevolucao(Aluguel aluguelParaDevolucao)
+        {
+            if (aluguelParaDevolucao.DataRetorno is not null)
+                return Result.Fail("A devolução já foi realizada!");
+
+            aluguelParaDevolucao.DataRetorno = DateTime.Now;
+            aluguelParaDevolucao.AluguelAtivo = false;
+            
+
+            repositorioAluguel.Editar(aluguelParaDevolucao);
+
+            return Result.Ok(aluguelParaDevolucao);
+        }
+
         public Result<Aluguel> Editar(Aluguel aluguelAtualizado)
         {
             var aluguel = repositorioAluguel.SelecionarPorId(aluguelAtualizado.Id);
@@ -33,6 +43,7 @@ namespace LocadoraDeVeiculos.Service.Servicos
                 return Result.Fail("O aluguel não foi encontrado!");
 
             aluguel.Cliente = aluguelAtualizado.Cliente;
+            aluguel.Condutor = aluguelAtualizado.Condutor;
             aluguel.GrupoDeAutomoveis= aluguelAtualizado.GrupoDeAutomoveis;
             aluguel.Veiculo = aluguelAtualizado.Veiculo;
             aluguel.DataSaida = aluguelAtualizado.DataSaida;
@@ -69,13 +80,13 @@ namespace LocadoraDeVeiculos.Service.Servicos
             return Result.Ok(aluguel);
         }
 
-        public Result<List<Aluguel>> SelecionarTodos()
+        public Result<List<Aluguel>> SelecionarTodos(int usuarioId)
         {
-            var aluguels = repositorioAluguel.SelecionarTodos();
+            var aluguels = repositorioAluguel.Filtrar(f => f.UsuarioId == usuarioId); ;
 
             return Result.Ok(aluguels);
         }
-
+      
 
 
     }

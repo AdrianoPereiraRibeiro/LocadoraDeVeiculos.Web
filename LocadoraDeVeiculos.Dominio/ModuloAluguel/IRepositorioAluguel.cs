@@ -1,12 +1,8 @@
 ﻿using LocadoraDeVeiculos.Dominio.Compartilhado;
-using LocadoraDeVeiculos.Dominio.ModuloCliente;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using LocadoraDeVeiculos.Dominio.ModuloAluguel;
 
-namespace LocadoraDeVeiculos.Dominio.ModuloAluguel
+
+namespace LocadoraDeVeiculos.Web.Dominio.ModuloAluguel
 {
     public interface IRepositorioAluguel : IRepositorio<Aluguel>
     {

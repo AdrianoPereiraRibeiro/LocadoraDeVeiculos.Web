@@ -6,21 +6,36 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace LocadoraDeVeiculos.Infraestrutura.Migrations
 {
     /// <inheritdoc />
-    public partial class addgrupodeautomoveis : Migration
+    public partial class addaluguel : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Usuario",
+                name: "AspNetRoles",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    UserName = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    NormalizedUserName = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Email = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    NormalizedEmail = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Name = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
+                    NormalizedName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
+                    ConcurrencyStamp = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_AspNetRoles", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "AspNetUsers",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    UserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
+                    NormalizedUserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
+                    Email = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
+                    NormalizedEmail = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     EmailConfirmed = table.Column<bool>(type: "bit", nullable: false),
                     PasswordHash = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     SecurityStamp = table.Column<string>(type: "nvarchar(max)", nullable: true),
@@ -34,7 +49,113 @@ namespace LocadoraDeVeiculos.Infraestrutura.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Usuario", x => x.Id);
+                    table.PrimaryKey("PK_AspNetUsers", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "AspNetRoleClaims",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    RoleId = table.Column<int>(type: "int", nullable: false),
+                    ClaimType = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ClaimValue = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_AspNetRoleClaims", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_AspNetRoleClaims_AspNetRoles_RoleId",
+                        column: x => x.RoleId,
+                        principalTable: "AspNetRoles",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "AspNetUserClaims",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    UserId = table.Column<int>(type: "int", nullable: false),
+                    ClaimType = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ClaimValue = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_AspNetUserClaims", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_AspNetUserClaims_AspNetUsers_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "AspNetUserLogins",
+                columns: table => new
+                {
+                    LoginProvider = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    ProviderKey = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    ProviderDisplayName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    UserId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_AspNetUserLogins", x => new { x.LoginProvider, x.ProviderKey });
+                    table.ForeignKey(
+                        name: "FK_AspNetUserLogins_AspNetUsers_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "AspNetUserRoles",
+                columns: table => new
+                {
+                    UserId = table.Column<int>(type: "int", nullable: false),
+                    RoleId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_AspNetUserRoles", x => new { x.UserId, x.RoleId });
+                    table.ForeignKey(
+                        name: "FK_AspNetUserRoles_AspNetRoles_RoleId",
+                        column: x => x.RoleId,
+                        principalTable: "AspNetRoles",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_AspNetUserRoles_AspNetUsers_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "AspNetUserTokens",
+                columns: table => new
+                {
+                    UserId = table.Column<int>(type: "int", nullable: false),
+                    LoginProvider = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    Value = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_AspNetUserTokens", x => new { x.UserId, x.LoginProvider, x.Name });
+                    table.ForeignKey(
+                        name: "FK_AspNetUserTokens_AspNetUsers_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -60,9 +181,9 @@ namespace LocadoraDeVeiculos.Infraestrutura.Migrations
                 {
                     table.PrimaryKey("PK_TBCliente", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_TBCliente_Usuario_Usuario_Id",
+                        name: "FK_TBCliente_AspNetUsers_Usuario_Id",
                         column: x => x.Usuario_Id,
-                        principalTable: "Usuario",
+                        principalTable: "AspNetUsers",
                         principalColumn: "Id");
                 });
 
@@ -79,9 +200,9 @@ namespace LocadoraDeVeiculos.Infraestrutura.Migrations
                 {
                     table.PrimaryKey("PK_TBGrupoDeAutomoveis", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_TBGrupoDeAutomoveis_Usuario_Usuario_Id",
+                        name: "FK_TBGrupoDeAutomoveis_AspNetUsers_Usuario_Id",
                         column: x => x.Usuario_Id,
-                        principalTable: "Usuario",
+                        principalTable: "AspNetUsers",
                         principalColumn: "Id");
                 });
 
@@ -101,9 +222,9 @@ namespace LocadoraDeVeiculos.Infraestrutura.Migrations
                 {
                     table.PrimaryKey("PK_TBPrecosCombustiveis", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_TBPrecosCombustiveis_Usuario_Usuario_Id",
+                        name: "FK_TBPrecosCombustiveis_AspNetUsers_Usuario_Id",
                         column: x => x.Usuario_Id,
-                        principalTable: "Usuario",
+                        principalTable: "AspNetUsers",
                         principalColumn: "Id");
                 });
 
@@ -122,9 +243,9 @@ namespace LocadoraDeVeiculos.Infraestrutura.Migrations
                 {
                     table.PrimaryKey("PK_TBTaxasEServicos", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_TBTaxasEServicos_Usuario_Usuario_Id",
+                        name: "FK_TBTaxasEServicos_AspNetUsers_Usuario_Id",
                         column: x => x.Usuario_Id,
-                        principalTable: "Usuario",
+                        principalTable: "AspNetUsers",
                         principalColumn: "Id");
                 });
 
@@ -148,16 +269,16 @@ namespace LocadoraDeVeiculos.Infraestrutura.Migrations
                 {
                     table.PrimaryKey("PK_TBCondutor", x => x.Id);
                     table.ForeignKey(
+                        name: "FK_TBCondutor_AspNetUsers_Usuario_Id",
+                        column: x => x.Usuario_Id,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id");
+                    table.ForeignKey(
                         name: "FK_TBCondutor_TBCliente_ClienteId",
                         column: x => x.ClienteId,
                         principalTable: "TBCliente",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_TBCondutor_Usuario_Usuario_Id",
-                        column: x => x.Usuario_Id,
-                        principalTable: "Usuario",
-                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
@@ -179,15 +300,15 @@ namespace LocadoraDeVeiculos.Infraestrutura.Migrations
                 {
                     table.PrimaryKey("PK_PlanosCobrancas", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_PlanosCobrancas_TBGrupoDeAutomoveis_GrupoDeAutomoveisId",
-                        column: x => x.GrupoDeAutomoveisId,
-                        principalTable: "TBGrupoDeAutomoveis",
+                        name: "FK_PlanosCobrancas_AspNetUsers_UsuarioId",
+                        column: x => x.UsuarioId,
+                        principalTable: "AspNetUsers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_PlanosCobrancas_Usuario_UsuarioId",
-                        column: x => x.UsuarioId,
-                        principalTable: "Usuario",
+                        name: "FK_PlanosCobrancas_TBGrupoDeAutomoveis_GrupoDeAutomoveisId",
+                        column: x => x.GrupoDeAutomoveisId,
+                        principalTable: "TBGrupoDeAutomoveis",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -209,16 +330,16 @@ namespace LocadoraDeVeiculos.Infraestrutura.Migrations
                 {
                     table.PrimaryKey("PK_TBVeiculo", x => x.Id);
                     table.ForeignKey(
+                        name: "FK_TBVeiculo_AspNetUsers_Usuario_Id",
+                        column: x => x.Usuario_Id,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id");
+                    table.ForeignKey(
                         name: "FK_TBVeiculo_TBGrupoDeAutomoveis_GrupoDeAutomoveisId",
                         column: x => x.GrupoDeAutomoveisId,
                         principalTable: "TBGrupoDeAutomoveis",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_TBVeiculo_Usuario_Usuario_Id",
-                        column: x => x.Usuario_Id,
-                        principalTable: "Usuario",
-                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
@@ -228,6 +349,7 @@ namespace LocadoraDeVeiculos.Infraestrutura.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Cliente_Id = table.Column<int>(type: "int", nullable: false),
+                    Condutor_Id = table.Column<int>(type: "int", nullable: false),
                     GrupoDeAutomoveis_Id = table.Column<int>(type: "int", nullable: false),
                     Veiculo_Id = table.Column<int>(type: "int", nullable: false),
                     DataSaida = table.Column<DateTime>(type: "datetime", nullable: false),
@@ -242,6 +364,11 @@ namespace LocadoraDeVeiculos.Infraestrutura.Migrations
                 {
                     table.PrimaryKey("PK_TBAluguel", x => x.Id);
                     table.ForeignKey(
+                        name: "FK_TBAluguel_AspNetUsers_Usuario_Id",
+                        column: x => x.Usuario_Id,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id");
+                    table.ForeignKey(
                         name: "FK_TBAluguel_PlanosCobrancas_Plano_Id",
                         column: x => x.Plano_Id,
                         principalTable: "PlanosCobrancas",
@@ -251,6 +378,12 @@ namespace LocadoraDeVeiculos.Infraestrutura.Migrations
                         name: "FK_TBAluguel_TBCliente_Cliente_Id",
                         column: x => x.Cliente_Id,
                         principalTable: "TBCliente",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_TBAluguel_TBCondutor_Condutor_Id",
+                        column: x => x.Condutor_Id,
+                        principalTable: "TBCondutor",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
@@ -265,11 +398,6 @@ namespace LocadoraDeVeiculos.Infraestrutura.Migrations
                         principalTable: "TBVeiculo",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_TBAluguel_Usuario_Usuario_Id",
-                        column: x => x.Usuario_Id,
-                        principalTable: "Usuario",
-                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
@@ -302,6 +430,45 @@ namespace LocadoraDeVeiculos.Infraestrutura.Migrations
                 column: "TaxasEServicosId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_AspNetRoleClaims_RoleId",
+                table: "AspNetRoleClaims",
+                column: "RoleId");
+
+            migrationBuilder.CreateIndex(
+                name: "RoleNameIndex",
+                table: "AspNetRoles",
+                column: "NormalizedName",
+                unique: true,
+                filter: "[NormalizedName] IS NOT NULL");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_AspNetUserClaims_UserId",
+                table: "AspNetUserClaims",
+                column: "UserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_AspNetUserLogins_UserId",
+                table: "AspNetUserLogins",
+                column: "UserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_AspNetUserRoles_RoleId",
+                table: "AspNetUserRoles",
+                column: "RoleId");
+
+            migrationBuilder.CreateIndex(
+                name: "EmailIndex",
+                table: "AspNetUsers",
+                column: "NormalizedEmail");
+
+            migrationBuilder.CreateIndex(
+                name: "UserNameIndex",
+                table: "AspNetUsers",
+                column: "NormalizedUserName",
+                unique: true,
+                filter: "[NormalizedUserName] IS NOT NULL");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_PlanosCobrancas_GrupoDeAutomoveisId",
                 table: "PlanosCobrancas",
                 column: "GrupoDeAutomoveisId");
@@ -315,6 +482,11 @@ namespace LocadoraDeVeiculos.Infraestrutura.Migrations
                 name: "IX_TBAluguel_Cliente_Id",
                 table: "TBAluguel",
                 column: "Cliente_Id");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_TBAluguel_Condutor_Id",
+                table: "TBAluguel",
+                column: "Condutor_Id");
 
             migrationBuilder.CreateIndex(
                 name: "IX_TBAluguel_GrupoDeAutomoveis_Id",
@@ -384,7 +556,19 @@ namespace LocadoraDeVeiculos.Infraestrutura.Migrations
                 name: "AluguelTaxaEServico");
 
             migrationBuilder.DropTable(
-                name: "TBCondutor");
+                name: "AspNetRoleClaims");
+
+            migrationBuilder.DropTable(
+                name: "AspNetUserClaims");
+
+            migrationBuilder.DropTable(
+                name: "AspNetUserLogins");
+
+            migrationBuilder.DropTable(
+                name: "AspNetUserRoles");
+
+            migrationBuilder.DropTable(
+                name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
                 name: "TBPrecosCombustiveis");
@@ -396,19 +580,25 @@ namespace LocadoraDeVeiculos.Infraestrutura.Migrations
                 name: "TBTaxasEServicos");
 
             migrationBuilder.DropTable(
+                name: "AspNetRoles");
+
+            migrationBuilder.DropTable(
                 name: "PlanosCobrancas");
 
             migrationBuilder.DropTable(
-                name: "TBCliente");
+                name: "TBCondutor");
 
             migrationBuilder.DropTable(
                 name: "TBVeiculo");
 
             migrationBuilder.DropTable(
+                name: "TBCliente");
+
+            migrationBuilder.DropTable(
                 name: "TBGrupoDeAutomoveis");
 
             migrationBuilder.DropTable(
-                name: "Usuario");
+                name: "AspNetUsers");
         }
     }
 }
