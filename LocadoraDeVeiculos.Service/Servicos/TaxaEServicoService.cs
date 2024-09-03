@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using LocadoraDeVeiculos.Dominio.ModuloTaxaEServico;
+using LocadoraDeVeiculos.Dominio.ModuloVeiculo;
 
 namespace LocadoraDeVeiculos.Service.Servicos
 {
@@ -68,6 +69,27 @@ namespace LocadoraDeVeiculos.Service.Servicos
                 .Filtrar(f => f.UsuarioId == usuarioId);
 
             return Result.Ok(taxasEServicos);
+        }
+
+        public List<TaxaEServico> SelecionarPorIdsObjetos(int[] Ids, Veiculo v)
+        {
+           List<TaxaEServico> taxaEServico = new List<TaxaEServico>();
+            foreach (TaxaEServico t in repositorioTaxaEServico
+                         .Filtrar(f => f.UsuarioId == v.UsuarioId))
+            {
+                for (int i = 0; i <Ids.Length; i++)
+                {
+                    if (Ids[i] == t.Id)
+                    {
+                        taxaEServico.Add(t);
+                    }
+                }
+            }
+
+            if (taxaEServico is null)
+                return null;
+
+            return taxaEServico;
         }
     }
 }

@@ -79,6 +79,15 @@ namespace LocadoraDeVeiculos.Service.Servicos
             return Result.Ok(clientes);
         }
 
+        public Cliente SelecionarPorIdObjeto(int clienteId)
+        {
+            var cliente = repositorioCliente.SelecionarPorId(clienteId);
+
+            if (cliente is null)
+                return null;
+
+            return cliente;
+        }
 
 
     }

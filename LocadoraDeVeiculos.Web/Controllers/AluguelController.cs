@@ -1,9 +1,12 @@
 ﻿using AutoMapper;
 using LocadoraDeVeiculos.Dominio.ModuloAluguel;
+using LocadoraDeVeiculos.Dominio.ModuloCliente;
 using LocadoraDeVeiculos.Dominio.ModuloTaxaEServico;
 using LocadoraDeVeiculos.Infraestrutura.ModuloTaxaEServico;
 using LocadoraDeVeiculos.Service.Servicos;
+using LocadoraDeVeiculos.Web.Aplicacao.Servicos;
 using LocadoraDeVeiculos.Web.Controllers;
+using LocadoraDeVeiculos.Web.Dominio.ModuloPlanoCobranca;
 using LocadoraDeVeiculos.Web.Models;
 using LocadoraDeVeiculos.Web.Service.Servicos;
 using Microsoft.AspNetCore.Mvc;
@@ -15,25 +18,31 @@ public class AluguelController : WebControllerBase
 {
     private readonly AluguelService AluguelService;
     private readonly VeiculoService VeiculoService;
+    private readonly GrupoDeAutomoveisService GrupoDeAutomoveisService;
     private readonly CondutorService CondutorService;
     private readonly TaxaEServicoService TaxaEServicoService;
     private readonly ClienteService ClienteService;
+    private readonly PlanoCobrancaService PlanoService;
     private readonly IMapper mapeador;
 
     public AluguelController(
         AluguelService AluguelService,
         VeiculoService VeiculoService,
+        GrupoDeAutomoveisService GrupoDeAutomoveisService,
         CondutorService CondutorService,
         TaxaEServicoService TaxaEServicoService,
         ClienteService ClienteService,
+        PlanoCobrancaService PlanoService,
         IMapper mapeador
     )
     {
         this.AluguelService = AluguelService;
         this.VeiculoService = VeiculoService;
+        this.GrupoDeAutomoveisService = GrupoDeAutomoveisService;
         this.CondutorService = CondutorService;
         this.TaxaEServicoService = TaxaEServicoService;
         this.ClienteService = ClienteService;
+        this.PlanoService = PlanoService;
         this.mapeador = mapeador;
     }
 
@@ -66,10 +75,21 @@ public class AluguelController : WebControllerBase
 
         if (!ModelState.IsValid)
             return View(CarregarDadosFormulario(inserirVm));
-        
-        var aluguel = mapeador.Map<Aluguel>(inserirVm);
 
-
+        Aluguel aluguel = new Aluguel(
+            ClienteService.SelecionarPorIdObjeto(inserirVm.ClienteId),
+            CondutorService.SelecionarPorIdObjeto(inserirVm.CondutorId),
+            GrupoDeAutomoveisService.SelecionarPorIdObjeto(VeiculoService.SelecionarPorIdObjeto(inserirVm.VeiculoId).GrupoDeAutomoveisId),
+            VeiculoService.SelecionarPorIdObjeto(inserirVm.VeiculoId),
+            inserirVm.DataLocacao,
+            inserirVm.DevolucaoPrevista, 
+            1000,
+            0,
+            PlanoService.SelecionarObjeto(VeiculoService.SelecionarPorIdObjeto(inserirVm.VeiculoId)),
+           TaxaEServicoService.SelecionarPorIdsObjetos(inserirVm.TaxasSelecionadas.ToArray(), VeiculoService.SelecionarPorIdObjeto(inserirVm.VeiculoId)),
+            true
+          );
+        aluguel.UsuarioId = ClienteService.SelecionarPorIdObjeto(inserirVm.ClienteId).UsuarioId;
         var resultado = AluguelService.Inserir(aluguel);
 
         if (resultado.IsFailed)
@@ -80,6 +100,45 @@ public class AluguelController : WebControllerBase
         }
 
         ApresentarMensagemSucesso($"O registro ID [{aluguel.Id}] foi inserido com sucesso!");
+
+        return RedirectToAction(nameof(Listar));
+    }
+    public IActionResult Editar(int id)
+    {
+        var resultado = AluguelService.SelecionarPorId(id);
+
+        if (resultado.IsFailed)
+        {
+            ApresentarMensagemFalha(resultado.ToResult());
+
+            return RedirectToAction(nameof(Listar));
+        }
+
+        var cliente = resultado.Value;
+
+        var editarVm = mapeador.Map<EditarAluguelViewModel>(cliente);
+
+        return View(editarVm);
+    }
+
+    [HttpPost]
+    public IActionResult Editar(EditarAluguelViewModel editarVm)
+    {
+        if (!ModelState.IsValid)
+            return View();
+
+        var aluguel = mapeador.Map<Aluguel>(editarVm);
+
+        var resultado = AluguelService.Editar(aluguel);
+
+        if (resultado.IsFailed)
+        {
+            ApresentarMensagemFalha(resultado.ToResult());
+
+            return RedirectToAction(nameof(Listar));
+        }
+
+        ApresentarMensagemSucesso($"O registro ID [{aluguel.Id}] foi editado com sucesso!");
 
         return RedirectToAction(nameof(Listar));
     }

@@ -63,4 +63,14 @@ public class GrupoDeAutomoveisService
 
         return Result.Ok(GrupoDeAutomoveis);
     }
+
+    public GrupoDeAutomoveis SelecionarPorIdObjeto(int salaId)
+    {
+        var GrupoDeAutomoveis = repositorioGrupoDeAutomoveis.SelecionarPorId(salaId);
+
+        if (GrupoDeAutomoveis is null)
+            return null;
+
+        return GrupoDeAutomoveis;
+    }
 }

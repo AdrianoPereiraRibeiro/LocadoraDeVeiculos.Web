@@ -69,5 +69,15 @@ namespace LocadoraDeVeiculos.Service.Servicos
 
             return Result.Ok(condutores);
         }
+
+        public Condutor SelecionarPorIdObjeto(int CondutorId)
+        {
+            var condutor = repositorioCondutor.SelecionarPorId(CondutorId);
+
+            if (condutor is null)
+                return null;
+
+            return condutor;
+        }
     }
 }

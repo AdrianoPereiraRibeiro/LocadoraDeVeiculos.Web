@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using LocadoraDeVeiculos.Dominio.ModuloVeiculo;
 
 namespace LocadoraDeVeiculos.Service.Servicos
 {
@@ -74,6 +75,29 @@ namespace LocadoraDeVeiculos.Service.Servicos
 
             return Result.Ok(planosCobranca);
         }
+
+        public PlanoCobranca SelecionarObjeto(Veiculo veiculo)
+        {
+            var planosCobranca = repositorioPlanoCobranca
+                .Filtrar(f => f.UsuarioId == veiculo.UsuarioId);
+            PlanoCobranca planoCobranca = null;
+
+            foreach (PlanoCobranca p in planosCobranca )
+            {
+                if (veiculo.GrupoDeAutomoveisId == p.GrupoDeAutomoveisId)
+                {
+                     planoCobranca = p;
+                }
+
+            }
+
+            if (planoCobranca is null)
+                return null;
+
+            return planoCobranca;
+        }
+
+
     }
 
 }

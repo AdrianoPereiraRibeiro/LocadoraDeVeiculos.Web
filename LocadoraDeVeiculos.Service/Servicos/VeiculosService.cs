@@ -73,5 +73,15 @@ namespace LocadoraDeVeiculos.Service.Servicos
             return Result.Ok(veiculos);
         }
 
+        public Veiculo SelecionarPorIdObjeto(int veiculoId)
+        {
+            var veiculo = repositorioVeiculo.SelecionarPorId(veiculoId);
+
+            if (veiculo is null)
+                return null;
+
+            return veiculo;
+        }
+
     }
 }
