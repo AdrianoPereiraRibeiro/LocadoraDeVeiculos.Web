@@ -30,7 +30,7 @@ public class GrupoDeAutomoveisController : WebControllerBase
         {
             ApresentarMensagemFalha(resultado.ToResult());
 
-            return RedirectToAction("Index", "Inicio");
+            return RedirectToAction("Index", "Home");
         }
 
         var grupoDeAutomoveis = resultado.Value;

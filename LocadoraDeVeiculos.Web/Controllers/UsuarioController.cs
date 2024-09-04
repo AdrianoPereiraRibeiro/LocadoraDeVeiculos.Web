@@ -64,7 +64,7 @@ public class UsuarioController : Controller
         {
             await signInManager.SignInAsync(usuario, isPersistent: false);
 
-            return RedirectToAction("Index", "Inicio");
+            return RedirectToAction("Index", "Home");
         }
 
         foreach (var erro in resultadoCriacaoUsuario.Errors)

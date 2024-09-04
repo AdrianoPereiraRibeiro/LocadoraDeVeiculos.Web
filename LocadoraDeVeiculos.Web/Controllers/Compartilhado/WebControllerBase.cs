@@ -30,7 +30,7 @@ public abstract class WebControllerBase : Controller
             Mensagem = $"Não foi possível encontrar o registro ID [{idRegistro}]!"
         });
 
-        return RedirectToAction("Index", "Inicio");
+        return RedirectToAction("Index", "Home");
     }
 
     protected void ApresentarMensagemFalha(Result resultado)

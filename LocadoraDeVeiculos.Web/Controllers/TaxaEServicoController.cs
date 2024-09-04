@@ -29,7 +29,7 @@ namespace LocadoraDeVeiculos.Web.Controllers
             {
                 ApresentarMensagemFalha(resultado.ToResult());
 
-                return RedirectToAction("Index", "Inicio");
+                return RedirectToAction("Index", "Home");
             }
 
             var taxaEServicos = resultado.Value;

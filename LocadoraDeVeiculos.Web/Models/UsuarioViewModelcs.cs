@@ -9,7 +9,7 @@ namespace LocadoraDeVeiculos.Web.Models
         {
             Tipos = [
                 new SelectListItem { Value = "Empresa", Text = "Empresa" },
-                new SelectListItem { Value = "Cliente", Text = "Cliente" }
+                new SelectListItem { Value = "Funcionario", Text = "Funcionario" }
             ];
         }
 
