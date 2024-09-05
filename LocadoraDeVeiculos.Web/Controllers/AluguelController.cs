@@ -61,6 +61,15 @@ public class AluguelController : WebControllerBase
 
         var listarLocacoesVm = mapeador.Map<IEnumerable<ListarAluguelViewModel>>(locacoes);
 
+        //foreach (var v in listarLocacoesVm)
+        //{
+        //    v.Veiculo = AluguelService.SelecionarPorIdObjeto();
+        //    v.Cliente = AluguelService.SelecionarPorIdObjeto().Cliente.Nome;
+        //    v.DataLocacao = AluguelService.SelecionarPorIdObjeto(v.Id).DataSaida;
+        //}
+
+        //Ficou uma bosta q nao funciona nada nesse aluguel , tenho q refazer tudo 
+
         return View(listarLocacoesVm);
     }
 

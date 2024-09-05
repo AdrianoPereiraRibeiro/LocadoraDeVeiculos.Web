@@ -80,6 +80,15 @@ namespace LocadoraDeVeiculos.Web.Service.Servicos
             return Result.Ok(aluguel);
         }
 
+        public Aluguel SelecionarPorIdObjeto(int aluguelId)
+        {
+            var aluguel = repositorioAluguel.SelecionarPorId(aluguelId);
+
+            if (aluguel is null)
+                return null;
+
+            return aluguel;
+        }
         public Result<List<Aluguel>> SelecionarTodos(int usuarioId)
         {
             var aluguels = repositorioAluguel.Filtrar(f => f.UsuarioId == usuarioId); ;
